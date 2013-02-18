@@ -1,0 +1,97 @@
+<%= render :partial => "project_edit_top", :locals => {:update => true} %>
+
+<div class='edit-title'>Project Status</div>
+
+<table class='status-table'>
+    <tr>
+        <td class='status-label'>
+            Project status
+        </td>
+        <td class='status-value bold'>
+            <%= @project.status %>
+        </td>
+    </tr>
+    <% donations = Donation.donations_for(@project.id) %>
+    <tr>
+        <td class='status-label'>
+            # of donations
+        </td>
+        <td class='status-value bold'>
+            <%= donations.size %>
+
+        </td>
+    </tr>
+
+    <% total = Donation.total_for(donations)%>
+    <tr>
+        <td class='status-label'>
+            Amount raised
+        </td>
+        <td class='status-value bold'>
+            $<%= number_with_delimiter(total) %>
+        </td>
+    </tr>
+    <tr>
+        <td class='status-label'>
+            Amount remaining
+        </td>
+        <td class='status-value bold'>
+            $<%= number_with_delimiter(@project.target_amount-total) %>
+        </td>
+    </tr>
+    <% daysleft = Project.days_left(@project.id) %>
+    <tr>
+        <td class='status-label'>
+            Days entailed
+        </td>
+        <td class='status-value bold'>
+            <%= @project.duration-daysleft %>
+        </td>
+    </tr>
+    <tr>
+        <td class='status-label'>
+            Days remaining
+        </td>
+        <td class='status-value bold'>
+            <%= daysleft %>
+        </td>
+    </tr>
+    <tr>
+        <td class='status-label'>
+            Project page views
+        </td>
+        <td class='status-value bold'>
+            <%= Pview.where(:project_id => @project.id).all.size %>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan='2' class='tdLine'>
+            <hr/>
+        </td>
+    </tr>
+
+    <tr>
+        <td class='status-label'>
+            Avg donations per day
+        </td>
+        <td class='status-value bold'>
+
+            <%= (donations.size.to_f/(@project.duration-daysleft).to_f).round(1) %>
+        </td>
+    </tr>
+    <tr>
+        <td class='status-label'>
+            Avg donation amount
+        </td>
+        <td class='status-value bold'>
+            <% if donations.size == 0 %>
+                $0
+            <% else %>
+                $<%= (total.to_f/donations.size.to_f).round(2) %>
+            <% end %>
+        </td>
+    </tr>
+</table>
+
+<%= render "project_edit_bottom" %>

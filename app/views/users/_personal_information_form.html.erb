@@ -1,0 +1,68 @@
+<div class='signup-form account-edit'>
+    <table>
+        <tbody>
+            <tr>
+                <th>Full Legal Name</th>
+                <td><%= f.text_field :fullname, :class => 'form-field addressField' %></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td class="hint">Full Legal Name</td>
+            </tr>
+            <tr>
+                <th>Address Line 1</th>
+                <td><%= f.text_field :address1, :class => 'form-field addressField' %></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td class="hint">Street address, P.O. box, company name, c/o</td>
+            </tr>
+            <tr>
+                <th>Address Line 2</th>
+                <td><%= f.text_field :address2, :class => 'form-field addressField' %></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td class="hint">Apartment, suite, unit, building, floor, etc.</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td><%= f.text_field :city, :class => 'signup-form-field' %></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td class="hint"></td>
+            </tr>
+            <tr>
+                <th>State, Province, or Region</th>
+                <td><%= f.text_field :province, :class => 'signup-form-field' %></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td class="hint"></td>
+            </tr>
+            <tr>
+                <th>Postal Code</th>
+                <td><%= f.text_field :postal_code, :class => 'form-field postal-code-field' %></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td class="hint"></td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td><%= f.select :country, options_for_select(countries), {},:class => 'signup-form-select' %></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td class="hint"></td>
+            </tr>
+            <% if submit %>
+            <tr>
+                <th></th>
+                <td><%=f.submit "Update",:disable_with => 'creating...', :class => 'signup-submit weeve-medium-button edit-submit'%></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

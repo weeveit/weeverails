@@ -1,0 +1,23 @@
+<div id='showProjectWrap'>
+	<% if current_admin %>
+    <% elsif current_user && current_user.account_type == Account.roles[:user] %>
+        <%= render :partial => 'embed_popup'%>
+    <% else %>
+		<%= render :partial => 'nonuser_popup' %>
+	<% end %>
+    <div class='project-page-head'>
+        <div class='project-page-head-title'><%= @project.title %></div>
+        <div class='project-page-head-subtitle'><%= link_to @npo.name, {:controller => :npos, :action => :profile, :id => @npo.account_id}, :class => 'weeve-link' %></div>
+        <% if current_user && current_user.id == @npo.account_id || current_admin %>
+            <%= link_to 'Manage Project', {:controller => :projects, :action => :edit_project, :id => @project.id, :account_id => current_user ? current_usertype.account_id : nil }, :class => 'weeve-medium-button manage-project-button' %>
+        <% end %>
+    </div>
+    <div class='project-page-links'>
+
+        <%= link_to('project', {:controller => :projects, :action => :show, :id => @project.id}, :class => "weeve-link project-page-link #{'selectedTab' if cp('projects','show')}") %>
+        <%= link_to("<span class='bold'>#{number_with_delimiter(Update.find_all_by_project_id(@project.id).size)}</span> updates".html_safe, {:controller => :projects, :action => :updates_show, :id => @project.id}, :class => "weeve-link project-page-link #{'selectedTab' if cp('projects','updates_show')}") %>
+        <%= link_to("<span class='bold'>#{number_with_delimiter(Donation.donations_for(@project.id).size)}</span> donations".html_safe, {:controller => :projects, :action => :donors_show, :id => @project.id}, :class => "weeve-link project-page-link #{'selectedTab' if cp('projects','donors_show')}") %>
+        <%= link_to("<span class='bold'>#{number_with_delimiter(Comment.find_all_by_project_id(@project.id).size)}</span> comments".html_safe, {:controller => :projects, :action => :comments_show, :id => @project.id}, :class => "weeve-link project-page-link #{'selectedTab' if cp('projects','comments_show')}") %>
+    </div>
+
+    <div class='project-page-content'>

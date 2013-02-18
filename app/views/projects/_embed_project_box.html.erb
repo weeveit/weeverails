@@ -1,0 +1,50 @@
+
+<%= stylesheet_link_tag    "application" %>
+
+<div class='projectbox' id='embeded'>
+
+    <div class='landingprojimg'>
+        <%= link_to({:controller => :projects, :action => :show, :id => p.id}, :target => "_blank") do %>
+            <img src='<%= p.thumbnail %>'></img>
+        <% end %>
+    </div>
+
+    <div class='proj-area-title'>
+        <%= link_to p.title, {:controller => :projects, :action => :show, :id => p.id}, :target => "_blank" %>
+    </div>
+
+    <div class='proj-area-subtitle'><%= Npo.find_by_account_id(p.account_id).name %></div>
+
+    <div class='proj-area-paragraph'><%= p.blurb %></div>
+
+    <div class='project-location-wrap'>
+        <div class='iconWrap'><img class='locationIcon' src='<%= asset_path('location-icon3.png') %>'/><span><%= p.location %></span></div>
+        <div class='iconWrap'><img class='moneyicon' src='<%= asset_path('moneyicon.png') %>'/><span>$<%= number_with_delimiter(p.target_amount) %> target</span></div>
+    </div>
+
+    <div class='donation-progress'>
+        <div class='donation-bar-wrapper'>
+            <% donations = Donation.donations_for(p.id) %>
+            <% total = Donation.total_for(donations) %>
+            <% percent = (total.to_f/p.target_amount.to_f*100).to_i %>
+            <div class='donation-bar' style='width: <%= percent <= 100 ? percent : 100 %>%'></div>
+        </div>
+
+        <div class='donation-progress-content'>
+            <div class='donation-progress-box'>
+                <div class='donation-progress-box-value'><%= percent %>%</div>
+                <div class='donation-progress-box-title'>funded</div>
+            </div>
+
+            <div class='donation-progress-box'>
+                <div class='donation-progress-box-value'>$<%= total %></div>
+                <div class='donation-progress-box-title'>raised</div>
+            </div>
+
+            <div class='donation-progress-box'>
+                <div class='donation-progress-box-value'><%= Project.days_left(p.id) %></div>
+                <div class='donation-progress-box-title'>days left</div>
+            </div>
+        </div>
+    </div>
+</div>

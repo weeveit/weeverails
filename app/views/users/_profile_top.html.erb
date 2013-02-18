@@ -1,0 +1,22 @@
+<div class='profile-wrapper'>
+    <div class='profile-left'>
+        <div class='profile-picture'><img src='<%= @user_details.thumbnail %>'></img></div>
+        <% if session[:user_id] == @user.id %>
+            <div class='profile-edit-link'><%= link_to 'Account Settings', user_edit_path, :class => 'weeve-link'%></div>
+        <% end %>
+        <div class='profile-info-title'>About <%= @user_details.fullname %></div>
+        <div class='profile-info-content'><%= @user_details.location if @user_details.showlocation%></div>
+        <div class='profile-info-content'><%= @user.email if @user_details.showemail%></div>
+
+    </div>
+    <div class='profile-right'>
+        <div class='profile-title-section'>
+            <div class='profile-name bold'><%= @user_details.fullname %></div>
+            <div class='profile-subname'>a change agent since <%= @user.created_at.strftime("%B %d, %Y") %></div>
+        </div>
+        <div class='profile-links'>
+            <%= link_to({:controller => :users, :action => :history, :id => @user.id}, :class => "profile-link #{'selectedTab' if home}") do %>
+                <span>history</span>
+            <% end %>
+        </div>
+        <div class='profile-main-wrapper'>

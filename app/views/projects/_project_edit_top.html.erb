@@ -1,0 +1,11 @@
+<div class='profile-wrapper' id='edit-wrapper'>
+
+    <div class='profile-left'>
+        <div id='edit-title'>Manage Project</div>
+        <div class='projectBackLink'><%= link_to 'back to project', {:controller => :projects, :action => :show, :id => @project.id}, :class => 'weeve-link' %></div>
+        <%= link_to('Project Status', {:controller => :projects, :action => :project_status, :id => @project.id, :account_id => current_usertype.account_id}, :class => "edit-link #{'selected-edit-link' if cp('projects','project_status')}") %>
+        <%= link_to 'Project Home', {:controller => :projects, :action => :edit_project, :id => @project.id, :account_id => current_usertype.account_id}, :class => "edit-link #{'selected-edit-link' if cp("projects","edit_project")}" %>
+        <%= link_to 'Updates', {:controller => :projects, :action => :project_updates, :id => @project.id, :account_id => current_usertype.account_id}, :class => "edit-link #{'selected-edit-link' if cp("projects","project_updates")}" %>
+    </div>
+
+    <div class='profile-right'>

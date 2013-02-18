@@ -1,0 +1,10 @@
+<%= form_tag do -%>
+    <div class='adminlogin'>
+        <label class="short ">Username</label>
+        <%= text_field 		:admin, :username, :class => " subscribe-form-field input" %>
+
+        <label class="short">Password</label>
+        <%= password_field 	:admin, :password, :class => " subscribe-form-field input" %>
+        <%= submit_tag "Log in", :class => 'weeve-medium-button' %>
+    </div>
+<% end -%>

@@ -1,0 +1,3 @@
+<%= render :partial => "profile_top", :locals => {:home => true} %>
+<%= @user_details.about.html_safe if @user_details.about %>
+<%= render :partial => "profile_bottom", :locals => {:home => true} %>

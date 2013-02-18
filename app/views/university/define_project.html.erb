@@ -1,0 +1,156 @@
+<%= render :partial => "uni_top", :locals => {:npo => true}%>
+<div class='uniContentWrap'>
+  <div class='uniTitle'>Define Your Project</div>
+
+  <div class='uniPara'>
+	Community projects can cover various sizes and scopes. These projects can include a Christmas food drive for vulnerable populations, an educational program for children in low income families, or an animal shelter for abandoned pets.  
+	</div>
+
+  <div class='uniPara'>
+	By having a nonprofit account you can take advantage of the following features for free!   
+	 <ol class='uniBulletList'>
+      <li>Crowdfunding</li>
+      <li>Nonprofit Profile Page</li>
+      <li>Donation Processing</li>
+      <li>Social Media Integration</li>
+	  <li>Project Management</li>
+	  <li>Blog Update</li>
+	  <li>Downloadable Donor List</li>
+    </ol>
+  </div>
+
+
+  <div class='uniPara'>
+    Please follow our project guidelines when creating your first project.
+  </div>
+
+  <div class='uniSubtitle'>
+    How do I create a Project?
+  </div>
+
+
+  <div class='uniPara'>
+    Click on the “Create new project” and agree to our terms of use and guidelines. You will be directed to a form that requires you to fill out information about your project.
+  </div>
+
+  <div class='uniProject projectbox'>
+    <div class='landingprojimg'>
+      <img src='<%= asset_path('shark.png')%>'></img>
+    </div>
+    <div class='proj-area-title'>
+      <div class='proj-area-title'>Fin Free Vancouver</div>
+    </div>
+    <div class='proj-area-subtitle'> Shark Truth</div>
+    <div class='proj-area-paragraph'>
+      Fin Free Vancouver will promote awareness about shark finning, catalyze change in the restaurant industry, and leverage this to build public support for legislation.
+    </div>
+    <div class='project-location-wrap'>
+      <div class='iconWrap'><img class='locationIcon' src='<%= asset_path('location-icon3.png') %>'/><span>Vancouver, BC</span></div>
+      <div class='iconWrap'><img class='moneyicon' src='<%= asset_path('moneyicon.png') %>'/><span>$20,000 target</span></div>
+    </div>
+    <div class='donation-progress'>
+      <div class='donation-bar-wrapper'>
+        <div class='donation-bar' style='width: 53%'></div>
+      </div>
+      <div class='donation-progress-content'>
+        <div class='donation-progress-box'>
+          <div class='donation-progress-box-value'>53%</div>
+          <div class='donation-progress-box-title'>funded</div>
+        </div>
+        <div class='donation-progress-box'>
+          <div class='donation-progress-box-value'>$12,344</div>
+          <div class='donation-progress-box-title'>raised</div>
+        </div>
+        <div class='donation-progress-box'>
+          <div class='donation-progress-box-value'>12</div>
+          <div class='donation-progress-box-title'>days left</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class='uniSubtitle'>
+    Project Title
+  </div>
+
+  <div class='uniPara'>
+    Your project title should be simple, specific, and memorable. It should be no longer than 60 characters.
+  </div>
+
+  <div class='uniSubtitle'>
+    Project Preview
+  </div>
+
+  <div class='uniPara'>
+	Project preview is the bite-sized information that supporters see when they browse through projects on Weeve. This important aspect of your project sums up all of the unique elements of your project and excites potential supporters to learn more about your story.  
+	</div>
+
+  <div class='uniSubtitle'>
+    Choosing the right Project Image
+  </div>
+
+  <div class='uniPara'>
+	A picture is worth a thousand words, so pick an image that is going to attract the most attention. Also, make sure that the image fits the dimensions of the project preview: 213px by 150px (1.42:1).  
+	</div>
+
+  <div class='uniSubtitle'>
+    Elements of a great Project Blurb
+  </div>
+
+  <div class='uniPara uniSingle'>
+    <span class='bold'>Clear and concise.</span> People should know exactly what your project is about from reading your pitch. Use language that everyone understands.
+  </div>
+
+  <div class='uniPara uniSingle'>
+    <span class='bold'>Tell a story.</span> What is your story? Be real, be genuine, be sincere.
+  </div>
+
+  <div class='uniPara uniSingle'>
+    <span class='bold'>Targeted.</span> Who are you speaking to? What types of supporters are most engaged with your project?
+  </div>
+
+  <div class='uniPara uniSingle'>
+    <span class='bold'>Impact Oriented.</span> At the end of the day, what value are you bringing to your community with this project?
+  </div>
+
+  <div class='uniPara uniSingle'>
+    <span class='bold'>Has a Hook.</span> What is your project’s attraction factor? What will make donors want to learn more about your project?
+  </div>
+
+  <div class='uniSubtitle'>
+    Setting your fundraising goal
+  </div>
+
+  <div class='uniPara'>
+    It’s important to set a reasonable fundraising goal for your project. 
+  </div>
+
+  <div class='uniPara'>
+    Here are some tips on setting this goal:
+    <ul class='uniBulletList'>
+      <li>Determine your costs.  Supplies, labour, and administration can all be part of the cost to your project.</li>
+      <li>Don’t try to do too much.  You can generate more funding than your goal, so it’s a good idea to set your target towards a minimal viable scope.</li>
+      <li>Set an amount that is achievable within the fundraising deadline.</li>
+    </ul>
+  </div>
+
+  <div class='uniSubtitle'>
+    Setting your fundraising deadline
+  </div>
+
+  <div class='uniPara'>
+	Weeve allows projects to fundraise for 15 to 60 days. This is because longer duration creates less urgency, leads to procrastination, and oftentimes loses momentum. In light of this, Weeve recommends 30 days as the fundraising duration for projects. This gives you enough time to both reach out to your network and engage supporters to act immediately.  
+	</div>
+
+  <div class='uniPara'>
+**Please note that you cannot change your fundraising goal, timeframe, and tax receipt eligibility after submission.  </div>
+
+  <hr class='dotted uniDotted'/>
+
+  <div class='uniNextWrap'>
+    <%= link_to 'Get Started', {:controller => :university, :action => :nonprofit_accounts}, :class => 'uniPrev' %>
+    <%= link_to 'Describe Your Project', {:controller => :university, :action => :describe_project}, :class => 'uniNext' %>
+  </div>
+</div>
+<%= render :partial => "uni_bottom"%>

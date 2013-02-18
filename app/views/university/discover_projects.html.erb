@@ -1,0 +1,102 @@
+<%= render :partial => "uni_top", :locals => {:user => true}%>
+<div class='uniContentWrap'>
+  <div class='uniTitle'>Discover Projects</div>
+
+  <div class='uniPara'>
+    Weeve is a marketplace where you can discover amazing projects at work in your neighbourhood. Meet the people who are driving change in your community!
+  </div>
+
+	<div class='uniSubtitle'>
+		What is a Community Project?
+	</div>
+	
+	<div class='uniPara'>
+		A community project on Weeve is an initiative taken on by a registered nonprofit organizations or charities.  Every project is created and managed by members of these organizations to ensure the legitimacy of each endeavour.  Weeve verifies the existence of nonprofits and reviews each project before they go live to ensure the quality and transparency, so you can be sure that your donations are going towards an actual cause that yields tangible results!
+	</div>
+	
+  <div class='uniSubtitle'>
+    What kind of projects are on Weeve?
+  </div>
+
+  <div class='uniPara'>
+	At this point, Weeve only hosts community projects taken on by registered nonprofit organizations or charities. Examples of these projects range from a shelter for vulnerable populations to a new research initiative. A community project responds to the needs of a community and has a measurable social impact.  </div>
+
+  <div class='uniprojWrap'>
+      <div class='projectbox uniproject'>
+        <div class='landingprojimg'>
+          <img src='<%= asset_path('shark.png')%>'></img>
+        </div>
+        <div class='proj-area-title'>
+          <div class='proj-area-title'>Fin Free Vancouver</div>
+        </div>
+        <div class='proj-area-subtitle'> Shark Truth</div>
+        <div class='proj-area-paragraph'>
+          Fin Free Vancouver will promote awareness about shark finning, catalyze change in the restaurant industry, and leverage this to build public support for legislation.
+        </div>
+        <div class='project-location-wrap'>
+          <div class='iconWrap'><img class='locationIcon' src='<%= asset_path('location-icon3.png') %>'/><span>Vancouver, BC</span></div>
+          <div class='iconWrap'><img class='moneyicon' src='<%= asset_path('moneyicon.png') %>'/><span>$20,000 target</span></div>
+        </div>
+        <div class='donation-progress'>
+          <div class='donation-bar-wrapper'>
+            <div class='donation-bar' style='width: 53%'></div>
+          </div>
+          <div class='donation-progress-content'>
+            <div class='donation-progress-box'>
+              <div class='donation-progress-box-value'>53%</div>
+              <div class='donation-progress-box-title'>funded</div>
+            </div>
+            <div class='donation-progress-box'>
+              <div class='donation-progress-box-value'>$12,344</div>
+              <div class='donation-progress-box-title'>raised</div>
+            </div>
+            <div class='donation-progress-box'>
+              <div class='donation-progress-box-value'>12</div>
+              <div class='donation-progress-box-title'>days left</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='projectbox uniproject'>
+        <div class='landingprojimg'>
+          <img src='<%= asset_path('oddsquad.png')%>'></img>
+        </div>
+        <div class='proj-area-title'> On Track Program </div>
+        <div class='proj-area-subtitle'> Odd Squad Productions Society </div>
+        <div class='proj-area-paragraph'>
+          On Track celebrates youth making healthy lifestyle choices, by empowering them with the information and experience necessary to further their positive leadership roles within their community.
+        </div>
+        <div class='project-location-wrap'>
+          <div class='iconWrap'><img class='locationIcon' src='<%= asset_path('location-icon3.png') %>'/><span>Vancouver, BC</span></div>
+          <div class='iconWrap'><img class='moneyicon' src='<%= asset_path('moneyicon.png') %>'/><span>$1,100 target</span></div>
+        </div>
+        <div class='donation-progress'>
+          <div class='donation-bar-wrapper'>
+            <div class='donation-bar' style='width: 40%'>
+            </div>
+          </div>
+          <div class='donation-progress-content'>
+            <div class='donation-progress-box'>
+              <div class='donation-progress-box-value'>40%</div>
+              <div class='donation-progress-box-title'>funded</div>
+            </div>
+            <div class='donation-progress-box'>
+              <div class='donation-progress-box-value'>$542</div>
+              <div class='donation-progress-box-title'>raised</div>
+            </div>
+            <div class='donation-progress-box'>
+              <div class='donation-progress-box-value'>15</div>
+              <div class='donation-progress-box-title'>days left</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <hr class='dotted uniDotted'/>
+
+  <div class='uniNextWrap'>
+    <%= link_to 'Get Started', {:controller => :university, :action => :user_accounts}, :class => 'uniPrev' %>
+    <%= link_to 'Donate to Projects', {:controller => :university, :action => :donate_projects}, :class => 'uniNext' %>
+  </div>
+</div>
+<%= render :partial => "uni_bottom"%>

@@ -1,0 +1,29 @@
+<%= render 'menubar' %>
+
+</br></br>
+
+<%= render 'search' %>
+
+
+</br></br>
+
+
+<div class='npoadminwrap'>
+  <div class='nponame bold'>All NPOS</div>
+  <table class='npoprojtable'>
+    <tr>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>Email</th>
+      <th>PayPal Email</th>
+    </tr>
+    <% @npos.each do |n| %>
+        <tr>
+          <td><%= n.name %></td>
+          <td><%= n.representative %></td>
+          <td><%= Account.find(n.account_id).email %></td>
+          <td><%= n.paypal_email %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,78 @@
+<div class='helpTitleWrap'>
+    <img src='<%= asset_path('phdhat.png') %>'/>
+    <div class='helpTitle bold'>
+        Weeve University
+    </div>
+    <div class='helpSubTitle'>Learn about Weeve's community platform through Weeve University.  Information pages and tutorials are readily available and always kept up to date.  Engage your community and be part of the change!</div>
+</div>
+
+<div class='helpContent'>
+    <img src='<%= asset_path('block.png') %>'/>
+    <img src='<%= asset_path('block.png') %>'/>
+    <img src='<%= asset_path('block.png') %>'/>
+</div>
+
+<div class='basicWrap'>
+  <div class='basicWrapLeft'>
+    <div class='basicTitle bold'>Value to Users</div>
+    <div class='quoteWrap'>
+      <img src='<%= asset_path('quote.png')%>'/>
+      <span class='italic'>Weeve is a community for anyone who believes in positive change</span>
+    </div>
+    <div class='basicConent'>
+      <div class='basicPointWrap'>
+        <span class='bold'>Discovery.</span>
+        Discover amazing local community projects around you. Fund and follow change that you want to see in your community.
+      </div>
+      <div class='basicPointWrap'>
+        <span class='bold'>Transparency.</span>
+        Receive updates on what your contribution is being used for. See the change that you’ve ignited.
+      </div>
+      <div class='basicPointWrap'>
+        <span class='bold'>Philanthropy 2.0.</span>
+        Track your giving and community involvement. Build and manage your philanthropic profile.
+      </div>
+    </div>
+  </div>
+
+  <div class='basicWrapRight'>
+    <div class='bannerTitle bold'>User 101</div>
+    <%= link_to 'Get Started', {:controller => :university, :action => :user_accounts}, :class => 'bannerLink weeve-link' %>
+    <%= link_to 'Discover Projects', {:controller => :university, :action => :discover_projects}, :class => 'bannerLink weeve-link' %>
+    <%= link_to 'Donate to Projects', {:controller => :university, :action => :donate_projects}, :class => 'bannerLink weeve-link' %>
+  </div>
+</div>
+<hr class='dotted'/>
+<div class='basicWrap'>
+    <div class='basicWrapLeft'>
+        <div class='basicTitle bold'>Value to Nonprofit Organizations</div>
+        <div class='quoteWrap'>
+          <img src='<%= asset_path('quote.png')%>'/>
+          <span class='italic'>Weeve allows nonprofits to achieve a new level of outreach, efficiency, and transparency</span>
+        </div>
+        <div class='basicConent'>
+          <div class='basicPointWrap'>
+            <span class='bold'>Social Fundraising Solution.</span>
+            Fundraise for your community project with our free, simple, and secure funding platform.
+          </div>
+          <div class='basicPointWrap'>
+            <span class='bold'>Community Exposure.</span>
+            Share your project with a community of socially-minded individuals and businesses through integrated social media tools.
+          </div>
+          <div class='basicPointWrap'>
+            <span class='bold'>Project Management.</span>
+            Manage your projects easily in one place and have full control over your nonprofit profile.
+          </div>
+        </div>
+    </div>
+    <div class='basicWrapRight'>
+        <div class='bannerTitle bold'>Nonprofit 101</div>
+        <%= link_to 'Get Started', {:controller => :university, :action => :nonprofit_accounts}, :class => 'bannerLink weeve-link' %>
+        <%= link_to 'Define Your Project', {:controller => :university, :action => :define_project}, :class => 'bannerLink weeve-link' %>
+        <%= link_to 'Describe Your Project', {:controller => :university, :action => :describe_project}, :class => 'bannerLink weeve-link' %>
+        <%= link_to 'Manage Your Project', {:controller => :university, :action => :manage_project}, :class => 'bannerLink weeve-link' %>
+        <%= link_to 'Engage Your Community', {:controller => :university, :action => :community_engagement}, :class => 'bannerLink weeve-link' %>
+        <%= link_to 'Promote Your Project', {:controller => :university, :action => :project_promo}, :class => 'bannerLink weeve-link' %>
+        <%= link_to 'Complete Your Project', {:controller => :university, :action => :complete_project}, :class => 'bannerLink weeve-link' %>
+    </div>
+</div>

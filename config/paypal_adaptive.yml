@@ -1,0 +1,22 @@
+development:
+  environment: "sandbox"
+  username: "npo_1332820242_biz_api1.gmail.com"
+  password: "1332820266"
+  signature: "AAJPe6mki4-C4wHGCog2RV4goYbSA8vfeHa5TWqHeheW-NH4HVw9QyZf"
+  application_id: "APP-80W284485P519543T"
+
+test:
+  environment: "sandbox"
+  username: "sandbox_username"
+  password: "sandbox_password"
+  signature: "sandbox_signature"
+  application_id: "sandbox_app_id"
+  ssl_cert_file: "/assets/images/cert_key_perm.text"
+
+production:
+  environment: "production"
+  username: "my_production_username"
+  password: "my_production_password"
+  signature: "my_production_signature"
+  application_id: "my_production_app_id"
+  ssl_cert_file: "/assets/images/cert_key_perm.text"

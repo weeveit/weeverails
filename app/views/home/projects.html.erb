@@ -1,0 +1,48 @@
+<div class='projectleft'>
+    <ul>
+
+        <div class="listheader">Featured</div>
+        <% get_featured.values.each do |f| %>
+            <%= link_to f, {:controller => :home, :action => :projects, :featured => f}, :class => "catLink gray-link #{'selectedCatLink' if @featured == f }"%>
+        <% end %>
+
+
+        <div class="listheader">Categories</div>
+        <% @categories.each do |c| %>
+            <%= link_to c, {:controller => :home, :action => :projects, :category => c}, :class => "catLink gray-link #{'selectedCatLink' if @category == c }"%>
+        <% end %>
+
+        <div class="listheader">Locations</div>
+        <% @locations.each do |l| %>
+            <%= link_to l, {:controller => :home, :action => :projects, :location => l}, :class => "catLink gray-link #{'selectedCatLink' if @location == l }" %>
+        <% end %>
+    </ul>
+
+</div>
+<div class='projectright'>
+
+    <div class='project-caption'>
+        <div class='project-caption-content'>
+            <div class='project-caption-title weevetitle bold'>Discover Projects</div>
+            <div class='project-caption-subtitle weevesubtitle'>Fund and follow amazing change happening in your community</div>
+        </div>
+    </div>
+
+    <div class='project-area-wrapper'>
+        <div class='project-area-header'>
+            Browse /
+            <% if @category %>
+                <%= @category %>
+            <% elsif @location %>
+                <%= @location %>
+            <% elsif @featured %>
+                <%= @featured %>
+            <% end %>
+        </div>
+        <div class='project-area-content'>
+            <% @projects.each do |p| %>
+                <%=  render :partial => 'projects/project_box', :locals => {:p => p, :profile => false} %>
+            <% end %>
+        </div>
+    </div>
+</div>

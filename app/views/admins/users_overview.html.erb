@@ -1,0 +1,33 @@
+<%= render 'menubar' %>
+
+</br></br>
+
+<%= render 'search' %>
+
+
+</br></br>
+
+
+<div class='npoadminwrap'>
+  <div class='nponame bold'>All USERS</div>
+  <table class='npoprojtable'>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Donated</th>
+      <th>Uid</th>
+      <th>Provider</th>
+	  <th>Action</th>
+    </tr>
+    <% @users.each do |u| %>
+        <tr>
+          <td><%= u.fullname %></td>
+          <td><%= Account.find(u.account_id).email %></td>
+          <td><%= Donation.total_for(Donation.donations_for_user(u.id)) %> </td>
+          <td><%= Omniuser.find_by_account_id(u.account_id).uid if Omniuser.find_by_account_id(u.account_id) %></td>
+          <td><%= Omniuser.find_by_account_id(u.account_id).provider if Omniuser.find_by_account_id(u.account_id) %></td>
+		  <td><%= link_to 'Destroy', {:controller => :users, :action => :remove_user, :id => u.account_id}, :class => 'user_destroy' %>
+        </tr>
+    <% end %>
+  </table>
+</div>

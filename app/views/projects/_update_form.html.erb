@@ -1,0 +1,37 @@
+
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">
+bkLib.onDomLoaded(function() {
+	new nicEditor({
+        buttonList : ['left','center','image','bold','italic','link','unlink','ol','ul','fontFormat']
+    }).panelInstance('updateEditor');
+
+});
+</script>
+
+<%= form_for(@update, :url => {:controller => :updates, :action => action, :project_id => @project.id, :update_id => @update.id, :account_id => current_usertype.account_id}) do |f| %>
+    <% if @update.errors.any? %>
+        <div class='confirmBox error smallmargin'>
+            <div class='closeConfirm'></div>
+            <% for message in @update.errors.full_messages %>
+              <li><%= message %></li>
+            <% end %>
+        </div>
+    <% end %>
+    <div id='project-edit-wrap'>
+        <div class='project-signup-form-title'>Update Title</div>
+
+        <div class='project-file-input-wrap'>
+            <%= f.text_field :title, :class => 'project-signup-text-medium input', :id => 'proj-title-input' %>
+        </div>
+
+        <div class='project-signup-form-title'>Update Content</div>
+        <div class='project-signup-form-content rightAreaHint'>Inform your users of any updates with the project.  Keeping them in the loop helps build a relationship and creates retention!</div>
+        <div class='richTextWrap'>
+            <%= f.text_area :body, :class => 'project-signup-textarea input', :id => 'updateEditor' %>
+        </div>
+
+        <button class='weeve-medium-button buttonRightMargin'><%= submit_value %></button>
+        <%= link_to "Cancel", {:controller => :projects, :action => :project_updates, :project_id => @project.id, :account_id => current_usertype.account_id}, :class => 'weeve-link' %>
+    </div>
+<% end %>

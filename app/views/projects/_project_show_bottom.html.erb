@@ -1,0 +1,82 @@
+    </div>
+
+    <div class='project-page-rightpanel'>
+        <% donations = Donation.donations_for(@project.id) %>
+        <div class='right-panel-value-box'>
+            <div class='value-box-value'><%= donations.size %></div>
+            <div class='value-box-subtitle'>donations</div>
+        </div>
+        <div class='right-panel-value-box'>
+            <div class='value-box-value'>$<%= number_with_delimiter(Donation.total_for(donations)) %></div>
+            <div class='value-box-subtitle'>donated of $<%= number_with_delimiter(@project.target_amount, :delimiter => ',') %></div>
+        </div>
+        <div class='right-panel-value-box'>
+            <div class='value-box-value'><%= Project.days_left(@project.id) %></div>
+            <div class='value-box-subtitle'>days to go</div>
+        </div>
+
+        <% if current_user && current_user.account_type == Account.roles[:user] && @project.status == Project.status[:running] %>
+            <div class='donate-button weeve-medium-button'>
+                <div class='donate-button-content'>make a donation</div>
+                <div class='donate-button-subtitle'>$1 minimum</div>
+            </div>
+            <script type='text/javascript'>
+                loadDonateButton();
+            </script>
+        <% elsif @project.status == Project.status[:success] %>
+            <div class='projectEndWrap bold'>
+                Project ended successfully on <%= (@project.startdate + @project.duration.days).strftime('%l:%I%p %B %e, %Y %Z') %>
+            </div>
+        <% elsif !current_user %>
+            <div class='donate-button-nonuser weeve-medium-button'>
+                <div class='donate-button-content'>make a donation</div>
+                <div class='donate-button-subtitle'>$1 minimum</div>
+            </div>
+			<script type='text/javascript'>
+                loadNonuserDonateButton();
+            </script>
+			<!-- <%= link_to "Sign up to make a donation!", {:controller => :users, :action => :new}, :class => ' donate-button weeve-medium-button project-signup' %> -->
+        <% end %>
+
+        <div class='horizontal-line'></div>
+
+
+        <div class='project-npo-name'><%= link_to @npo.name, {:controller => :npos, :action => :profile, :id => @npo.account_id}, :class => 'weeve-link' %></div>
+        <div class='project-npo-content'><%= @npo.bio %></div>
+        <div class='horizontal-line'></div>
+        <% if @twitter %>
+            <div class='projectTwitterFeedWrap'>
+                <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+                <script>
+                new TWTR.Widget({
+                  version: 2,
+                  type: 'profile',
+                  rpp: 8,
+                  interval: 30000,
+                  width: 275,
+                  height: 328,
+                  theme: {
+                    shell: {
+                      background: '#f2f2f2',
+                      color: '#595959'
+                    },
+                    tweets: {
+                      background: '#ffffff',
+                      color: '#4a4a4a',
+                      links: '#2e7eb3'
+                    }
+                  },
+                  features: {
+                    scrollbar: false,
+                    loop: false,
+                    live: true,
+                    behavior: 'all'
+                  }
+                }).render().setUser('<%= @twitter %>').start();
+                </script>
+            </div>
+        <% end %>
+    </div>
+
+
+</div>

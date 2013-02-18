@@ -1,0 +1,32 @@
+<div class='signup-choices-wrap'>
+   
+    <%= link_to({:controller => :npos, :action => :new}, :class => 'signup-choice-wrap') do %>
+            <div class='choice-title weevetext'>I'm a non-profit!</div>
+        <div class='choice-img'>
+            <img src='<%= asset_path('npoicon.png')%>'></img>
+        </div>
+        <div class='choice-description'>
+            Create community projects and get funded!
+        </div>
+    <% end %>
+ 	<%= link_to({:controller => :users, :action => :new}, :class => 'signup-choice-wrap') do %>
+        <div class='choice-title weevetext'>I'm a user!</div>
+        <div class='choice-img'>
+            <img src='<%= asset_path('usericon.png')%>'></img>
+        </div>
+        <div class='choice-description'>
+            Discover and fund community projects that you care about!
+        </div>
+    <% end %>
+    <div class='signup-choice-wrap'>
+        <div class='whitewash'></div>
+        <div class='comingSoon'>Coming Soon</div>
+        <div class='choice-title weevetext'>I'm a company!</div>
+        <div class='choice-img'>
+            <img src='<%= asset_path('corpicon.png')%>'></img>
+        </div>
+        <div class='choice-description'>
+            Sponsor projects and improve your social corporate image!
+        </div>
+    </div>
+</div>

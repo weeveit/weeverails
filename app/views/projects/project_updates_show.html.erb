@@ -1,0 +1,30 @@
+<%= render "project_show_top" %>
+
+<% if current_user && current_user.id == @npo.account_id %>
+    <div class='newUpdateWrap'>
+        <%= link_to "New Update", {:controller => :updates, :action => :new, :project_id => @project.id, :account_id => current_usertype.account_id}, :class => 'weeve-medium-button' %>
+    </div>
+<% end %>
+
+<% if @updates.size == 0 %>
+    <div class='projectnotice bold'>
+        There are no updates yet for <%= @project.title %>.
+    </div>
+<% end %>
+
+<% @updates.reverse.each do |u| %>
+    <div class='project-update-wrap'>
+
+            <div class='project-update-title'>
+                <div class='bold'><%= u.title %></div>
+                <div class='project-update-date'><%= time_ago_in_words(u.created_at)+" ago" %></div>
+            </div>
+
+            <div class='project-update-content'>
+                <%= u.body.html_safe %>
+            </div>
+    </div>
+<% end %>
+
+<%= render "project_show_bottom" %>
+

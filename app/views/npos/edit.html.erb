@@ -1,0 +1,18 @@
+<div class='profile-wrapper' id='edit-wrapper'>
+    <div class='profile-left'>
+        <div id='edit-title'><%= @usertype.name %></div>
+        <%= link_to('Account', {:controller => :npos, :action => :edit}, :class => "edit-link #{'selected-edit-link' if cp('npos','edit')}") %>
+        <%= link_to('Password', {:controller => :accounts, :action => :edit_password}, :class => "edit-link #{'selected-edit-link' if cp('accounts','edit_password')}") %>
+        <%= link_to('PayPal', {:controller => :npos, :action => :edit_paypal}, :class => "edit-link #{'selected-edit-link' if cp('npos','edit_paypal')}") %>
+    </div>
+
+    <div class='profile-right'>
+        <% if cp('npos','edit') %>
+            <%= render "edit_profile" %>
+        <% elsif cp('accounts','edit_password') %>
+            <%= render "edit_password" %>
+        <% elsif cp('npos','edit_paypal') %>
+            <%= render "edit_paypal" %>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<%= render :partial => "uni_top", :locals => {:npo => true}%>
+<div class='uniContentWrap'>
+  <div class='uniTitle'>Promote Your Project</div>
+
+  <div class='uniPara'>
+	The fundraising success of your project is highly dependent on how you reach out to your networks. Having a project on Weeve does not automatically guarantee funding - it is up to you to generate momentum for your project.  </div>
+
+  <div class='uniSubtitle'>
+    How do I promote my project?
+  </div>
+
+  <div class='uniPara'>
+	There are several ways to promote your project, but first you need to put yourself into the shoes of your potential supporters. Take the time to send sincere and personal e-mails to your existing donor list, staff, family and friends to generate an initial base of funding. Share your project via Facebook and Twitter, or embed your project widget onto your nonprofit website or blog. In addition, a press release of your project may very well attract your target community to support you!  
+	</div>
+
+  <div class='uniSubtitle'>
+    Who is in my crowd?
+  </div>
+
+  <div class='uniPara'>
+	Your crowd is composed of your network, your extended network, the Weeve community, and our extended social networks. If you have an exceptional project, you may see overwhelming support from the entire city! At Weeve, our job is to make sure your project is as successful as it can be! 
+	 </div>
+
+  <hr class='dotted uniDotted'/>
+
+  <div class='uniNextWrap'>
+    <%= link_to 'Engage Your Community', {:controller => :university, :action => :community_engagement}, :class => 'uniPrev' %>
+    <%= link_to 'Complete Your Project', {:controller => :university, :action => :complete_project}, :class => 'uniNext' %>
+  </div>
+</div>
+<%= render :partial => "uni_bottom"%>

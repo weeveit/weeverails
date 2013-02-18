@@ -1,0 +1,60 @@
+<div class='edit-title'>Account</div>
+<%= form_for(@usertype, :url => {:controller => :npos, :action => :update_paypal}) do |f| %>
+    <% if @usertype.errors.any? %>
+        <div class='confirmBox error smallmargin'>
+            <div class='closeConfirm'></div>
+            <% for message in @usertype.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+        </div>
+    <% end %>
+    <div class='signup-form account-edit'>
+        <table>
+            <tbody>
+                <tr>
+                    <th class='picture-th'>PayPal Status</th>
+                    <td class='mediumHint'>
+                        <% if @usertype.paypal_status == Npo.paypal_status[:unverified] %>
+                            <span class='weevered '><%= @usertype.paypal_status %>.</span> In order for you to receive your project funds, you must have a verified PayPal Business Account.  Please fill in your PayPal email below and we will confirm your PayPal status.
+                        <% elsif @usertype.paypal_status == Npo.paypal_status[:pending] %>
+                            <span class='weeveorange '><%= @usertype.paypal_status %>.</span> We are in the process of verifying your PayPal account. This usually takes 1-2 business days.
+                        <% elsif @usertype.paypal_status == Npo.paypal_status[:verified] %>
+                            <span class='weevegreen '><%= @usertype.paypal_status %>.</span> Your PayPal account is verified, you may now
+                        <% end %>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint"></td>
+                </tr>
+                <tr>
+                    <th>PayPal Email</th>
+                    <td><%= f.text_field :paypal_email, :class => 'signup-form-field' %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint"></td>
+                </tr>
+
+				<tr>
+                    <th>PayPal Primary Curreny</th>
+                    <td><%= f.select :paypal_currency, Npo.currency, {},:class => 'signup-form-select' %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint">What is the primary currency of your PayPal account?</td>
+                </tr>
+
+                <tr class='emptyrow'>
+                    <th></th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td><%=f.submit "Update",:disable_with => 'creating...', :class => 'signup-submit weeve-medium-button'%></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<% end %>

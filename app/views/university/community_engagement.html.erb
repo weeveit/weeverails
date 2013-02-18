@@ -1,0 +1,40 @@
+<%= render :partial => "uni_top", :locals => {:npo => true}%>
+<div class='uniContentWrap'>
+  <div class='uniTitle'>Engage Your Community</div>
+
+  <div class='uniPara'>
+    As your project receives donations, it is important to engage your supports and converse with the community.  Keeping users in the loop with project updates and posting comments will bring user engagement to the next level.  Weeve provides a few helpful tools that help you to engage with your supporters.
+  </div>
+
+  <div class='uniSubtitle'>
+    Updates
+  </div>
+
+  <div class='uniPara'>
+	A great way to keep your supporters engaged is to update them on the progress of your project. Weeve allows you to do this through a blog, where you can thank your supporters, update them on your progress, and celebrate the positive social change that the project generates.
+  </div>
+
+  <div class='uniSubtitle'>
+    Comments
+  </div>
+
+  <div class='uniPara'>
+	It is easy for your supporters to leave a comment on your project page. You can also leave a comment and it will be highlighted in blue. Comments are a great way to make small announcements or to thank your supporters.  
+	</div>
+
+  <div class='uniSubtitle'>
+    Twitter Stream
+  </div>
+
+  <div class='uniPara'>
+	By adding your twitter handle to your account, all your projects will have your twitter stream that keeps your supporters engaged with your social media activities. Having a twitter handle allows your project profile to become more vibrant and interactive.
+  </div>
+
+  <hr class='dotted uniDotted'/>
+
+  <div class='uniNextWrap'>
+    <%= link_to 'Manage Your Project', {:controller => :university, :action => :manage_project}, :class => 'uniPrev' %>
+    <%= link_to 'Promote Your Project', {:controller => :university, :action => :project_promo}, :class => 'uniNext' %>
+  </div>
+</div>
+<%= render :partial => "uni_bottom"%>

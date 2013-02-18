@@ -1,0 +1,26 @@
+<div class='npo-profile-wrapper'>
+    <div class='npo-profile-title-section'>
+            <div class='npo-profile-img-wrapper'>
+                <img src='<%= @user_details.thumbnail %>'></img>
+            </div>
+            <div class='npo-profile-header-wrap'>
+                <div class='npo-profile-title-wrap'>
+                    <div class='profile-npo-title-name bold'><%= @user_details.name %></div>
+                    <div class='weevesubtitle profile-npo-title-location'><%= "#{@user_details.location} ·" if @user_details.location && @user_details.location != "" %> <%= (link_to 'Visit our website', "http://"+@user_details.website, :class => 'weeve-link') if @user_details.website && @user_details.website != "" %></div>
+                </div>
+                <div class='profile-subname'><%= @user_details.bio %></div>
+                <% if session[:user_id] %>
+                    <div class='npo-profile-title-links'>
+                        <%= link_to 'Account Settings', npo_edit_path, :class => 'title-link weeve-link'%>
+                        <%= link_to 'Create new Project', {:controller => :projects, :action => :new, :account_id => @user.id}, :class => 'title-link weeve-medium-button'%>
+                    </div>
+                <% end %>
+            </div>
+    </div>
+
+    <div class='profile-links'>
+        <%= link_to "projects", {:controller => :npos, :action => :profile, :id => @user.id}, :class => "profile-link #{'selectedTab' if params[:action] == 'profile'}" %>
+        <%= link_to "about", {:controller => :npos, :action => :about, :id => @user.id}, :class => "profile-link #{'selectedTab' if cp('npos', 'about')}" %>
+    </div>
+
+    <div class='npo-profile-content-wrap'>

@@ -1,0 +1,96 @@
+<div class='signup-header'>
+    <div class='signup-title'>Build the Community</div>
+    <div class='signup-subtitle'>Create your community project to raise money for your cause. Empower donors in your community to engage in social good.</div>
+</div>
+
+<%= form_for(@account, :url => {:controller => :npos, :action => :create}) do |f| %>
+    <% if @account.errors.any? %>
+        <div class='confirmBox error smallmargin'>
+            <div class='closeConfirm'></div>
+            <% for message in @account.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+        </div>
+    <% end %>
+    <div class='signup-form'>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Email</th>
+                    <td><%= f.text_field :email, :class => 'signup-form-field' %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint">You will use this to log in.</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td><%= f.password_field :password, :class => 'signup-form-field' %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint">At least 6 characters</td>
+                </tr>
+
+                <%= fields_for @user do |user| %>
+                    <tr>
+                        <th>Organization Name</th>
+                        <td><%= user.text_field :name, :class => 'signup-form-field' %></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td class="hint">Full name as registered</td>
+                    </tr>
+                    <tr>
+                        <th>Representative Name</th>
+                        <td><%= user.text_field :representative, :class => 'signup-form-field' %></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td class="hint">First and last name</td>
+                    </tr>
+                <% end %>
+				<tr>
+                    <th></th>
+                    <td>
+						<div class='paypal_warning'>
+							<div class='bold'>Weeve project eligibility requirements:</div>
+							<ul>
+								<li>You must be a registered nonprofit or charity <%= link_to 'learn more', :controller => :university, :action => :nonprofit_accounts %></li>
+								<li>You must have a Verified Business PayPal account <%= link_to 'learn more', "https://www.paypal.com/us/webapps/mpp/security/verification-faq" %></li>
+							</ul>		
+						</div>
+					</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><div class='agreement'>By clicking the button, you agree to the terms below: </br></br>
+                        Welcome to Weeve! Weeve is a crowdfunding platform that allows users to to fund and follow nonprofit projects that they care about in their community. Users can donate to projects, write comments, and manage their profiles. Nonprofit clients (“Partners”) can manage their project pages/profiles, upload videos/photos, and interact with their supporters. The website and its services at www.weeveinc.com (“website” or “site”) are provided by Weeve Ventures Inc (“Weeve” or “We” or “Company”) Before using services (“Service”) provided by Weeve Ventures Inc, please read these terms of use (“Agreement” or “Terms of Use”) carefully. By using the website, you (“users” or “you”) agree to these terms of use, and the privacy policies.<br/><br/>
+                       Modification of Terms<br/><br/>
+                       Weeve reserves the right to modify or replace any Terms of Use at any time without notice. It is your responsibility to check the Terms of Use periodically for changes. Your continued use of the services provided by Weeve following implementation of any changes or policies,to the Terms of Use constitutes acceptance of such change or privacy. If in any case you do not agree to any revised version of the Terms of Use, please do not use this site.<br/><br/>
+                       Registration<br/><br/>
+                       You do not have to register to browse through the Site and view its Content (“Content”, or “Projects”). However, to use Weeve’s services, you may be required to register with your e-mail (“Username”), and password. You are required to provide accurate, complete and updated registration information. Failure to do so shall constitute a breach of the Terms of Use, which may result in immediate termination of your Weeve account. With the intent to impersonate another person, your Weeve account will also be terminated immediately. Weeve reserves the right to reject, terminate, remove user accounts in our sole discretion without notices. You are solely responsible for your password, and account activities. You should never use another person’s account without the person’s permission. You are responsible to notify the Company immediately if you suspect unauthorized use of your account or other security breach issues.<br/><br/>
+                       Fundraising and Commerce<br/><br/>
+                       Weeve is not liable for your interactions with any organizations or individuals found on our Site. This includes, but is not limited to, delivery of goods and services, and any other terms, conditions, policies associated with Projects on the Site. Weeve Ventures Inc is not responsible for any damage or loss incurred as a result of such transaction. In no event should Weeve become involved with any disputes between you and nonprofit clients or other users. In the event of dispute, you release Weeve Ventures Inc, its officers, employees, shareholders, directors, agents, independent contractors, interns, and successors in rights from claims, damages and demands of every kind, known or unknown, suspected or unsuspected, disclosed or undisclosed, arising out of or in any way related to such disputes and our service. Weeve makes no guarantees regarding the performance or fairness of Paypal. Nonprofit clients may initiate refunds at their own discretion. Weeve is not responsible for issuing refunds for funds that have been collected by Nonprofit clients. Weeve reserves the right to cancel, interrupt or suspend a Project at any time for any reason.<br/><br/>
+                       Donations<br/><br/>
+                       Donations are given via Paypal. You are responsible for paying all the fees, and applicable taxes associated with Paypal. Weeve is independent from Paypal, and by accepting our terms, you have also acknowledged Paypal’s terms of use.<br/><br/>
+                       Third Party Site<br/><br/>
+                       Weeve permits Third Party links on our platform, but we are not responsible or liable for the content, functions, accuracy, legality, appropriateness or any other aspect of such websites or resources. When you access third party websites, you do so at your own risk. By agreeing to the Terms, you acknowledge that Weeve shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such website or resource.<br/><br/>
+                       Refunds<br/><br/>
+                       All refunds inquiry should be directed to the nonprofit organization whom you donated to. Each nonprofit organization has its own refund policy. By agreeing to the Terms, you acknowledge that Weeve shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the nonprofit organizations.<br/><br/>
+                       Copyright and Licenses<br/><br/>
+                       The entire contents of the Site are protected by international copyright and trademark laws. The owner of the copyrights and trademarks are Weeve, its affiliates or other third party licensors. YOU MAY NOT MODIFY, COPY, REPRODUCE, REPUBLISH, UPLOAD, POST, TRANSMIT, OR DISTRIBUTE, IN ANY MANNER, THE MATERIAL ON THE SITE, INCLUDING TEXT, GRAPHICS, CODE AND/OR SOFTWARE. You may print and download portions of material from the different areas of the Site solely for your own non-commercial use provided that you agree not to change or delete any copyright or proprietary notices from the materials. You agree to grant to Weeve a non-exclusive, royalty-free, worldwide, perpetual license, with the right to sub-license, to reproduce, distribute, transmit, create derivative works of, publicly display and publicly perform any materials and other information (including, without limitation, ideas contained therein for new or improved products and services) you submit to any public areas of the Site (such as bulletin boards, forums and newsgroups) or by e-mail to Weeve by all means and in any media now known or hereafter developed. You also grant to Weeve the right to use your name in connection with the submitted materials and other information as well as in connection with all advertising, marketing and promotional material related thereto. You agree that you shall have no recourse against Weeve for any alleged or actual infringement or misappropriation of any proprietary right in your communications to Weeve.<br/><br/>
+                       Termination<br/><br/>
+                       Weeve Ventures Inc. may terminate your access to our services immediately at any time with or without reasons, cause, or notice. This may result in forfeiture and destruction of all information associated with your membership. If you wish to terminate your account, you may do so by following termination instructions on the following link: www.weeve.it/account/terminate. All provisions of the Terms of Use which by their nature shall survive termination, including, but not limited to, ownership provisions, warranty disclaimers, indemnity and limitations of liability.
+                       Miscellaneous<br/><br/>
+                       This Agreement shall all be governed and construed in accordance with the laws of Canada applicable to agreements made and to be performed in Canada. You agree that any legal action or proceeding between Weeve and you for any purpose concerning this Agreement or the parties' obligations hereunder shall be brought exclusively in a federal or state court of competent jurisdiction sitting in British Columbia . Any cause of action or claim you may have with respect to the Service must be commenced within one (1) year after the claim or cause of action arises or such claim or cause of action is barred. Weeve's failure to insist upon or enforce strict performance of any provision of this Agreement shall not be construed as a waiver of any provision or right. Neither the course of conduct between the parties nor trade practice shall act to modify any provision of this Agreement. Weeve may assign its rights and duties under this Agreement to any party at any time without notice to you.<br/><br/>
+                                                    </tr>
+
+                <tr>
+                    <th></th>
+                    <td><%=f.submit "Create account",:disable_with => 'creating...', :class => 'signup-submit weeve-medium-button'%></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<% end %>

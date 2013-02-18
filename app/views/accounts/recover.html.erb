@@ -1,0 +1,9 @@
+<div class='forgot-pass-title'>Forgot your password?</div>
+<div class='forgot-pass-subtitle'>Type in your email below and we will send you with instructions on how to reset your password!</div>
+<%= form_tag do %>
+    <div class='recover-wrap'>
+        <%= text_field :account, :email, :class => 'input recover-input' %>
+        <%= submit_tag "Submit",:disable_with => 'creating...', :class => 'signup-submit weeve-medium-button'%>
+    </div>
+<% end %>
+<div class='did-you-know'>Did you know the tree sloth moves an average of 5cm/s?</div>

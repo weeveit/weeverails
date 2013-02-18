@@ -1,0 +1,58 @@
+<%= render :partial => "uni_top", :locals => {:npo => true}%>
+<div class='uniContentWrap'>
+    <div class='uniTitle'>Get Started</div>
+
+    <div class='uniPara'>
+		There is a crisis in the nonprofit sector. Nonprofit organizations are struggling to meet fast-climbing demands for their services due to lack of funding and exposure. At Weeve, we understand this pain and we have a solution. Weeve is dedicated to redefine social good and to democratize giving so that you can do what you do best – create lasting and meaningful social change. To get started, all you need is a nonprofit account.    </div>
+
+    <div class='uniSubtitle'>
+        What is a nonprofit account?
+    </div>
+
+    <div class='uniPara'>
+		Having a nonprofit account allows you to take advantage of the following Weeve features for free!
+		        <ul class='uniBulletList'>
+            <li>Crowdfunding</li>
+            <li>Nonprofit Profile Page</li>
+            <li>Donation Processing</li>
+            <li>Social Media Integration</li>
+            <li>Project Management</li>
+            <li>Blog Updates</li>
+            <li>Downloadable Donor List</li>
+        </ul>
+    </div>
+
+    <div class='uniSubtitle'>
+        How do I set up my nonprofit account?
+    </div>
+
+    <div class='uniPara'>
+		Simply click on “Sign Up” and fill out the sign up form. Once you have confirmed your e-mail address, you may log into your account to set up your nonprofit profile page. You may also customize your page with your logo, organization overview, twitter handle, and other relevant information.    
+		</div>
+
+    <div class='uniSubtitle'>
+        Am I an eligible Weeve Nonprofit?
+    </div>
+
+    <div class='uniPara'>
+        If you are a nonprofit society or charity registered under the BC Societies Act (or other provincial or state law) or the Canada Corporations Act (or other federal legislation in your country) then you are eligible. If you are an unincorporated group then you are, at this point, not eligible to host a project on Weeve.
+    </div>
+
+    <div class='uniPara'>
+       Eligible parties will need a verified PayPal nonprofit business account in order to receive funding. Please register a PayPal account at <a href="https://www.paypal.ca">wwww.paypal.ca</a> PayPal is a world-leading online transaction company that offers easy and secure online transactions. Once you have a verified nonprofit PayPal account, enter your PayPal e-mail address in “Account Settings”.
+    </div>
+
+ <div class='uniSubtitle'>
+        Is it free to use Weeve?
+    </div>
+    <div class='uniPara'>
+        It is absolutely free to use Weeve. Weeve does not take any transaction fee from usage or donations. Donations go directly from the donors to your PayPal account.
+    </div>
+
+    <hr class='dotted uniDotted'/>
+
+    <div class='uniNextWrap'>
+      <%= link_to 'Define Your Project', {:controller => :university, :action => :define_project}, :class => 'uniNext' %>
+    </div>
+</div>
+<%= render :partial => "uni_bottom"%>

@@ -1,0 +1,9 @@
+<%= form_tag({:controller => :admins, :action => :search}, :method => "get" ) do %>
+    <%= label_tag(:q,"Search:", :class => 'bold') %>
+    <%= text_field_tag(:q) %>
+
+    <%= select_tag(:type, options_for_select([['Type',1],['Non-profits',2],['Projects', 3], ['Representative',4]])) %>
+    <%= select_tag(:status, options_for_select([['Status',1],['Processing',2],['Running', 3], ['Ended',4]])) %>
+    <%= select_tag(:paypal, options_for_select([['Paypal',1],['Verified',2],['Not verified', 3]])) %>
+    <%= submit_tag("Search", :class => 'weeve-small-button sub-button') %>
+<% end %>

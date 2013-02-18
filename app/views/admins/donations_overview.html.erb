@@ -1,0 +1,49 @@
+<%= render 'menubar' %>
+
+</br></br>
+
+<%= render 'search' %>
+
+
+</br></br>
+
+
+<div class='npoadminwrap'>
+    <div class='nponame bold'>All donations</div>
+    <table class='npoprojtable'>
+        <tr>
+			<th>Type</th>
+			<th>Name</th>
+			<th>Email</th>
+            <th>Complete</th>
+            <th>Total amount</th>
+            <th>Recieved at</th>
+        
+            <th>Actions</th>
+        </tr>
+        <% @donations.each do |p| %>
+            <% if p.complete %>
+                <tr>
+                    <% if p.user_id == -1 %>
+                        <td>Guest Checkout</td>
+                    <% else %>
+                        <td>Account Checkout</td>
+                    <% end %>
+                    <% if p.user_id == -1 %>
+                    	<td>Anonymous</td>
+                    <% else %>
+                    	<td><%= User.find(p.user_id).fullname %></td>
+                    <% end %>
+                    <td><%= (Account.find(User.find(p.user_id).account_id).email) if p.user_id != -1 %></td>
+                    <td><%= p.complete %></td>
+                    <td>$<%= p.npo_amount%></td>
+                    <td><%= p.received_at.strftime("%D") if p.received_at%></td>
+                    
+                    <td>
+                    </td>
+                </tr>
+            <% end %>
+        <% end %>
+    </table>
+</div>
+

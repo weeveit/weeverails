@@ -1,0 +1,318 @@
+    <div id='fb-root'></div>
+    <script src='http://connect.facebook.net/en_US/all.js'></script>
+    <p><a onclick='postToFeed(); return false;'>Post to Feed</a></p>
+    <p id='msg'></p>
+
+    <script> 
+      FB.init({appId: "446180152073734", status: true, cookie: true});
+
+      function postToFeed() {
+
+        // calling the API ...
+        var obj = {
+          method: 'feed',
+          link: 'http://weeve.it',
+          picture: 'https://encrypted-tbn0.google.com/images?q=tbn:ANd9GcQ0H-tubYJJCpIT5OfHRfnATfEUAfkZ_BxIs2vHccdeR7Jyi2mf',
+          name: 'Facebook Dialogs',
+          caption: 'Reference Documentation',
+          description: 'Using Dialogs to interact with users.'
+        };
+
+        function callback(response) {
+          document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+        }
+
+        FB.ui(obj, callback);
+      }
+    
+    </script>
+
+<div class='npoadminwrap'>
+  <div class='nponame bold'>Weeve statistics</div>
+  <% all_donations = Donation.all_donations %>
+  <p>
+    <span class='bold'><%= all_donations.size %></span> donations
+  </p>
+  <p>
+    <% if all_donations.size == 0 %>
+        <span class='bold'>$0</span> average amount
+    <% else %>
+        <span class='bold'>$<%= (Donation.total_for(all_donations)/all_donations.size).round(2).to_s %></span> average amount
+    <% end %>
+  </p>
+  <p>
+    <span class='bold'><%= all_donations.size %></span> donations
+  </p>
+  <p>
+    <span class='bold'><%= User.all.size %></span> users
+  </p>
+  <p>
+    <span class='bold'><%= Npo.all.size %></span> npos
+  </p>
+</div>
+
+<div class='npoadminwrap'>
+    <div class='nponame bold'>All pending PayPal Accounts</div>
+    <table class='npoprojtable'>
+        <tr>
+            <th>NPO</th>
+            <th>PayPal Email</th>
+            <th>PayPal Status</th>
+            <th>Action</th>
+        </tr>
+        <% Npo.find_all_by_paypal_status(Npo.paypal_status[:pending]).each do |p| %>
+        <tr>
+            <td><%= p.name %></td>
+            <td><%= p.paypal_email %></td>
+            <td><%= p.paypal_status %></td>
+            <td>
+
+                <% if p.paypal_status == Npo.paypal_status[:pending] %>
+                    <%= link_to "Verify PayPal", {:controller => :npos, :action => :verify_paypal, :id => p.id}, :class => 'weeve-link' %>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+
+<div class='npoadminwrap'>
+  <div class='nponame bold'>All Features</div>
+  <table class='npoprojtable'>
+    <tr>
+      <th>Project Name</th>
+    </tr>
+    <% @features.each do |f| %>
+        <tr>
+          <td><%= Project.find(f.project_id).title %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class='npoadminwrap'>
+  <div class='nponame bold'>All NPOS</div>
+  <table class='npoprojtable'>
+    <tr>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>Email</th>
+      <th>PayPal Email</th>
+    </tr>
+    <% @npos.each do |n| %>
+        <tr>
+          <td><%= n.name %></td>
+          <td><%= n.representative %></td>
+          <td><%= Account.find(n.account_id).email %></td>
+          <td><%= n.paypal_email %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class='npoadminwrap'>
+  <div class='nponame bold'>All USERS</div>
+  <table class='npoprojtable'>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Uid</th>
+      <th>Provider</th>
+	  <th>Action</th>
+    </tr>
+    <% @users.each do |u| %>
+        <tr>
+          <td><%= u.fullname %></td>
+          <td><%= Account.find(u.account_id).email %></td>
+          <td><%= Omniuser.find_by_account_id(u.account_id).uid if Omniuser.find_by_account_id(u.account_id) %></td>
+          <td><%= Omniuser.find_by_account_id(u.account_id).provider if Omniuser.find_by_account_id(u.account_id) %></td>
+		  <td><%= link_to 'Destroy', {:controller => :users, :action => :remove_user, :id => u.account_id}, :class => 'user_destroy' %>
+        </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class='npoadminwrap'>
+    <div class='nponame bold'>All pending projects</div>
+    <table class='npoprojtable'>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Target</th>
+            <th>Duration</th>
+            <th>status</th>
+            <th>PayPal</th>
+            <th>Action</th>
+        </tr>
+        <% Project.where(:status => Project.status[:unverified]).each do |p| %>
+        <tr>
+            <td><%= p.title %></td>
+            <td><%= p.category %></td>
+            <td><%= p.location %></td>
+            <td>$<%= p.target_amount %></td>
+            <td><%= p.duration %> days</td>
+            <td><%= p.status %></td>
+            <td></td>
+            <td>
+                <%= link_to "View", {:controller => :projects, :action => :show, :id => p.id}, :class => 'weeve-link'%>
+                <% if p.status == Project.status[:unverified] %>
+                    <%= link_to "Start", {:controller => :admins, :action => :start_project, :id => p.id}, :class => 'weeve-link'%>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+
+<div class='npoadminwrap'>
+    <div class='nponame bold'>All donations</div>
+    <table class='npoprojtable'>
+        <tr>
+			<th>Type</th>
+            <th>User T ID</th>
+            <th>NPO T ID</th>
+            <th>Weeve T ID</th>
+            <th>Complete</th>
+            <th>Total amount</th>
+            <th>Weeve amount</th>
+            <th>Recieved at</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        <% @donations.each do |p| %>
+            <% if p.complete %>
+                <tr>
+                    <% if p.user_id == -1 %>
+                        <td>Guest Checkout</td>
+                    <% else %>
+                        <td>Account Checkout</td>
+                    <% end %>
+                    <td><%= p.sender_transaction_id %></td>
+                    <td><%= p.npo_transaction_id%></td>
+                    <td><%= p.weeve_transaction_id%></td>
+                    <td><%= p.complete %></td>
+                    <td>$<%= p.npo_amount%></td>
+                    <td>$<%= p.weeve_amount %></td>
+                    <td><%= p.received_at.strftime("%D") if p.received_at%></td>
+                    <td><%= (Account.find(User.find(p.user_id).account_id).email) if p.user_id != -1 %></td>
+                    <td>
+                    </td>
+                </tr>
+            <% end %>
+        <% end %>
+    </table>
+</div>
+
+<div class='npoadminwrap'>
+    <div class='nponame bold'>All guest info</div>
+    <table class='npoprojtable'>
+        <tr>
+            <th>Donation ID</th>
+			<th>Name</th>
+			<th>Amount</th>
+        </tr>
+        <% @guests.each do |g| %>
+            <% if g.donation_id %>
+                <tr>
+                    <td><%= g.donation_id %></td>
+                    <td><%= g.email %></td>
+                    <td><%= Donation.find(g.donation_id).npo_amount %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    </table>
+</div>
+
+<% @npos.each do |n| %>
+    <div class='npoadminwrap'>
+        <div class='nponame bold'>Information about <%= n.name %></div>
+        <ul class='npoinfo'>
+            <li>Name: <span class='bold'><%= n.name%></span></li>
+            <li>Representative: <span class='bold'><%= n.representative%></span></li>
+            <li>
+                PayPal: <span class='bold'><%= n.paypal_email%> (<%= n.paypal_status%>)</span>
+                <% if n.paypal_status == Npo.paypal_status[:pending] %>
+                    <%= link_to "Verify PayPal", {:controller => :npos, :action => :verify_paypal, :id => n.id}, :class => 'weeve-link' %>
+                <% end %>
+            </li>
+			<li>
+				Account id: <%= n.account_id %>
+			</li>
+
+        </ul>
+        <%= link_to "Delete Account", {:controller => :npos, :action => :delete_account, :id => n.id}, :class => 'weeve-medium-button weeve-delete' %>
+        <div class='bold'>Projects</div>
+        <table class='npoprojtable'>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Start Date</th>
+                <th>Target Amount</th>
+                <th>Duration</th>
+                <th>status</th>
+                <th>Action</th>
+            </tr>
+            <% Project.find_all_by_account_id(n.account_id).each do |p| %>
+            <tr>
+                <td><%= p.title %></td>
+                <td><%= p.category %></td>
+                <td><%= p.startdate %></td>
+                <td>$<%= p.target_amount %></td>
+                <td><%= p.duration %> days</td>
+                <td><%= p.status %></td>
+                <td>
+                    <%= link_to "View", {:controller => :projects, :action => :show, :id => p.id}, :class => 'weeve-link'%>
+                    |
+                    <% if p.status == Project.status[:unverified] %>
+                        <%= link_to "Start", {:controller => :admins, :action => :start_project, :id => p.id}, :class => 'weeve-link'%>
+                    <% end %>
+                      <% if p.status == Project.status[:queued] || p.status == Project.status[:running] %>
+                          <%= link_to "Stop", {:controller => :admins, :action => :stop_project, :id => p.id}, :class => 'weeve-link stop-link'%>
+                      <% end %>
+					|
+					<%= link_to "Feature", {:controller => :admins, :action => :feature_project, :id => p.id}, :class => 'weeve-link feature-link'%>
+                </td>
+            </tr>
+            <% end %>
+        </table>
+    </div>
+<% end %>
+
+<div class='npoadminwrap'>
+  <div class='nponame bold'>Subscribers</div>
+
+  <ul>
+    <% @subs.each do |s| %>
+        <li><%=  s.email %></li>
+    <% end %>
+  </ul>
+</div>
+
+<script type='text/javascript'>
+    $('.weeve-delete').click( function() {
+        if ( confirm("Are you sure you want to delete this NPO?") == true )
+            return true;
+        return false;
+    });
+
+	$('.user_destroy').click( function() {
+        if ( confirm("Are you sure you want to delete this User?") == true )
+            return true;
+        return false;
+    });
+
+    $('.stop-link').click( function() {
+        if ( confirm("Are you sure you want to stop this project?") == true )
+            return true;
+        return false;
+    });
+
+	$('.feature-link').click( function() {
+        if ( confirm("Are you sure you want to feature this project?") == true )
+            return true;
+        return false;
+    });
+
+
+</script>

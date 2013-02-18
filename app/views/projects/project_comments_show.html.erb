@@ -1,0 +1,44 @@
+<%= render "project_show_top" %>
+    <% if current_user %>
+        <%= form_tag :controller => :comments, :action => :create_comment, :project_id => @project.id, :account_id => current_user.id do %>
+        <div class='commentFormWrap'>
+            <div class='commentTitle bold'>Leave a comment</div>
+            <%= text_area :comment, :body, :class => "commentInput input" %>
+            <%= submit_tag "Post Comment", :class => 'weeve-small-button bold' %>
+        </div>
+        <% end %>
+    <% end %>
+
+    <% if @comments.size == 0 %>
+        <div class='projectnotice bold'>
+            There are no updates yet for <%= @project.title %>.
+        </div>
+    <% else %>
+        <div class='commentsWrap'>
+            <% @comments.reverse.each do |c| %>
+                <% user = User.find_by_account_id(c.account_id) %>
+                <% npo = Npo.find_by_account_id(c.account_id) %>
+                <div class='commentwrap <%= 'npoComment' if npo %>'>
+                    <div class='commentimg'><img src='<%= user ? user.thumbnail : npo.thumbnail %>'></img></div>
+                    <div class='comment-content-wrap'>
+                        <% if npo %>
+                            <%= link_to npo.name, {:controller => :npos, :action => :profile, :id => npo.account_id}, :class => 'weeve-link comment-username' %>
+                            <div class='comment-content'><%= c.body.html_safe %></div>
+                            <span class='comment-date'><%= time_ago_in_words(c.created_at) %> ago</span>
+                        <% else %>
+                            <%= link_to user.fullname, {:controller => :users, :action => :history, :id => user.account_id}, :class => 'weeve-link comment-username' %>
+                            <div class='comment-content'><%= c.body.html_safe %></div>
+                            <span class='comment-date'><%= time_ago_in_words(c.created_at) %> ago</span>
+                        <% end %>
+                    </div>
+                    <% if (current_user && c.account_id == current_user.id) || current_admin %>
+                        <div class='adminActionsWrap'>
+                            <%= 'Admin actions:' if current_admin %> <%= link_to "delete", {:controller => :comments, :action => :remove_comment, :project_id => @project.id, :id => c.id, :account_id => current_usertype.account_id }, :class => 'weeve-link' %>
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+<%= render "project_show_bottom" %>
+

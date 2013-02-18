@@ -1,0 +1,53 @@
+<%= render "project_show_top" %>
+
+
+<div class='popupContainer' id='embedPopup'>
+    <div class='clearBackground'></div>
+    <div class='popupWrap'>
+        <div class='popupCont' id='embedPopupCont'>
+            <div class="popupclose weeve-link">close</div>
+            <div class='popuptitle bold'>Project Widget</div>
+            <div class='embedContent'>Copy the code below and embed your project into your own website!</div>
+            <div><textarea readonly="readonly" class='input' id='embedInput'><iframe src='<%= Weeverails::Application.config.domain %>/embed?id=<%= @project.id%>' height=422 width=235 frameborder=0></iframe></textarea></div>
+            <%= render :partial => 'project_box', :locals => {:p => @project, :profile => false} %>
+
+        </div>
+    </div>
+</div>
+<script type='text/javascript'>
+    loadEmbedInput();
+</script>
+
+<div class='project-content-media'>
+    <% if @project.startingvideo %>
+        <div class='projectVideoWrap'>
+            <%= renderYoutube(600,380,@project.startingvideo).html_safe %>
+        </div>
+    <% else %>
+        <img src='<%= @project.startmedia %>' class='project-video'></img>
+    <% end %>
+</div>
+<div class="socialMedia">
+    <iframe src="//www.facebook.com/plugins/like.php?href=<%= request.url %>&amp;send=false&amp;layout=standard&amp;width=250&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:35px;" allowTransparency="true"></iframe>
+    <div class='tweetButtonWrap'>
+        <iframe class='twitter' allowtransparency="true" frameborder="0" scrolling="no"
+            src="//platform.twitter.com/widgets/tweet_button.html?url=<%= request.url %>&text=Community Project <%= @project.title %> "
+            style="width:130px; height:20px;"></iframe>
+    </div>
+    <button class='gray-gradient-button embedButton bold' id='embed'>EMBED</button>
+    <script type='text/javascript'>
+        loadEmbedPopup();
+    </script>
+</div>
+<hr class='dotted project-hr'/>
+<div class='project-content-title bold'>About this project</div>
+<div class='project-content-body'><%= @project.overview.html_safe %></div>
+<div class='project-content-title bold'>Project Impact</div>
+<div class='project-content-body'><%= @project.impact.html_safe %></div>
+<div class='project-content-title bold'>Use of project funds</div>
+<div class='project-content-body'><%= @project.funds.html_safe %></div>
+<div class='project-content-title bold'>Project milestones</div>
+<div class='project-content-body'><%= @project.milestones.html_safe %></div>
+
+<%= render "project_show_bottom" %>
+

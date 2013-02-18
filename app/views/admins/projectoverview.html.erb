@@ -1,0 +1,69 @@
+<%= render 'menubar' %>
+
+</br></br>
+
+<%= render 'search' %>
+
+
+</br></br>
+
+
+<div class='nponame bold'>Projects Overview</div>
+<table class='npoprojtable'>
+  <tr>
+
+    <th>Non-Profit Name</th>
+    <th>Project Name</th>
+    <th>Project Status</th>
+    <th>Representative Name</th>
+    <th>Representative E-mail</th>
+    <th>Paypal Status</th>
+    <th>Actions</th>
+    <th>Archive</th>
+    <th>Duration</th>
+  </tr>
+
+  <% @projects.each do |p| %>
+	  <% if !p.archive %>
+      	<tr>
+	        <% begin
+	             @nponm = Npo.find_by_account_id(p.account_id).name
+	             @npoid = Npo.find_by_account_id(p.account_id).id
+	             @nporep = Npo.find_by_account_id(p.account_id).representative
+	             @repemail = Account.find_by_id(p.account_id).email
+	             @paypalstatus = Npo.find_by_account_id(p.account_id).paypal_status
+	             @projtitle = p.title
+	           rescue
+	             @nponm = nil
+	             @npoid = nil
+	             @nporep = nil
+	             @repemail = nil
+	             @paypalstatus = nil
+	             @projtitle = nil
+	           end
+	        %>
+	        <td><%= link_to @nponm, :controller => 'npos' , :action => 'profile', :id => p.account_id   %></td>
+	        <td><%= link_to @projtitle, :controller => 'projects', :action => 'show', :id => p.id   %></td>
+	        <% status =  @projstatus = p.status %>
+	        <% classname = 'projectYellow' if status == Project.status[:queued] %>
+	        <% classname = 'projectGreen' if status == Project.status[:running] %>
+	        <% classname = 'projectYellow' if status == Project.status[:unverified] %>
+	        <% classname = 'projectRed' if status == Project.status[:success] %>
+	        <td class='<%= classname %>'><%= status %></td>
+	        <td><%= @nporep %></td>
+	        <td><%= link_to @repemail, 'mailto:' + @repemail.to_s %></td>
+	        <td><%= @paypalstatus %></td>
+	        <td><%= link_to "Start", {:controller => :admins, :action => :start_project, :id => p.id}, :class => 'weeve-link' %>
+	          <%= link_to "Stop", {:controller => :admins, :action => :stop_project, :id => p.id}, :class => 'weeve-link stop-link' %>
+	          <%= link_to "Feature", {:controller => :admins, :action => :feature_project, :id => p.id}, :class => 'weeve-link feature-link' %></td>
+	        <td><%= link_to "Archive", {:controller => :admins, :action => :archive, :id => p.id}, :class => 'weeve-link feature-link' %></td>
+            <td>
+              <%= form_for( p, :url => {:controller => :admins, :action => :update_project_duration, :p_id => p.id}) do |f| %>
+                  <%= f.text_field :duration %>
+                  <%= f.submit 'Update' %>
+              <% end %>
+            </td>
+	      </tr>
+		<% end %>
+  <% end %>
+</table>

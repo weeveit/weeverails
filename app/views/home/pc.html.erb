@@ -1,0 +1,60 @@
+<%= render :partial => 'pressbar' %>
+<div id='mediaDiv'>
+    <div id='mediaKitTitle' class='bold'>Press Coverage</div>
+    <p> This page contains press coverages for Weeve.</p>
+    <p> If you cannot find what you are looking for, feel free to <a href='mailto:hello@weeve.it' class='weeve-link'> contact us</a> directly</p>
+
+	<hr class='dotted mediaDotted'/>
+
+    <div class='mediaSubtitle bold'>Media Coverage</div>
+	<div class='coverageWrap'>
+		<table class='pressImgTable'>
+			<tr>
+				<td>
+		    		<%= link_to 'http://www.techvibes.com/blog/vancouvers-weeve-is-the-worlds-first-crowdfunding-platform-that-doesnt-take-a-cut-2012-07-05', :class => 'pressImg', :target => '_blank' do %>
+				   		<img src='<%= asset_path('techvibes.png')%>'/>
+				    <% end %>
+			    </td>
+				<td>
+					<%= link_to 'http://digitaljournal.com/article/329493', :class => 'pressImg', :target => '_blank' do %>
+					   		<img src='<%= asset_path('djlogo.jpeg')%>'/>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to 'http://metronews.ca/news/vancouver/312850/start-me-up-a-look-inside-vancouvers-start-up-entrepreneur-community/#', :class => 'pressImg', :target => '_blank' do %>
+					   		<img src='<%= asset_path('metrologo.jpeg')%>'/>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= link_to 'http://www.biv.com/article/20120724/BIV0112/307249939/social-media-harnessed-to-raise-investment-dollars', :class => 'pressImg', :target => '_blank' do %>
+					   		<img src='<%= asset_path('bivlogo.png')%>'/>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to 'http://www.vancouverobserver.com/city/vancouvers-weeve-brings-free-crowdfunding-alternative-kickstarter-and-indiegogo', :class => 'pressImg', :target => '_blank' do %>
+					   		<img src='<%= asset_path('vologo.png')%>'/>
+					<% end %>
+				</td>
+			</tr>
+		</table>
+	<!-- >
+	   <%= link_to 'http://www.google.ca', :class => 'pressImg' do %>
+			<img src='<%= asset_path('VO.png')%>'/>
+	   <% end %>
+	-->
+    </div>
+  	<p>August 7, 2012 <a href='http://www.vancouverobserver.com/city/vancouvers-weeve-brings-free-crowdfunding-alternative-kickstarter-and-indiegogo' target='_blank'>Vancouver Observer - Vancouver's Weeve brings free crowdfunding alternative to Kickstarter and Indiegogo</a></p>
+	<p>July 28, 2012 <a href='http://digitaljournal.com/article/329493' target='_blank'>Digital Journal - Vancouver startup Weeve set to disrupt non-profit fundraising</a></p>
+	<p>July 26, 2012 <a href='http://metronews.ca/news/vancouver/312850/start-me-up-a-look-inside-vancouvers-start-up-entrepreneur-community/#' target='_blank'>Metro - Start me up! A look inside Vancouver’s start-up entrepreneur community</a></p>
+	<p>July 24, 2012 <a href='http://www.biv.com/article/20120724/BIV0112/307249939/social-media-harnessed-to-raise-investment-dollars' target='_blank'>Business in Vancouver - Social media harnessed to raise investment dollars</a></p>
+    <p>July 5, 2012 <a href='http://www.techvibes.com/blog/vancouvers-weeve-is-the-worlds-first-crowdfunding-platform-that-doesnt-take-a-cut-2012-07-05' target='_blank'>TechVibes - Vancouver's Weeve is the World's First Crowdfunding Platform That Doesn't Take a Cut</a></p>
+
+	<hr class='dotted mediaDotted'/>
+
+    <div class='mediaSubtitle bold'>Blog Coverage</div>
+	<p>July 13, 2012 <a href='http://hummingbird604.com/2012/07/13/an-interview-with-trevor-loke-from-weeve-it/' target='_blank'>Hummingbird604 - An interview with Trevor Loke from Weeve.It</a></p>
+    <p>July 5, 2012 <a href='http://dailygumboot.ca/2012/07/vancouver-startup-gives-back-to-community-through-crowdfunding/' target='_blank'>The Daily Gumboot - Vancouver Startup Gives Back to Community Through Crowdfunding</a></p>
+	
+</div>

@@ -1,0 +1,41 @@
+<div class='profile-wrapper' id='edit-wrapper'>
+
+  <div class='uniLeft'>
+    <div id='uni-small-img-wrap' class='bold'>
+      <img src='<%= asset_path('phdhat.png') %>'/>
+      <span>Weeve University</span>
+    </div>
+
+    <% npo ||= false %>
+    <% user ||= false %>
+
+    <%= link_to('User 101', {:controller => :university, :action => :user_accounts}, :class => "bold edit-link #{'selected-edit-link' if user}") %>
+    <% if user %>
+        <%= link_to('Get Started', {:controller => :university, :action => :user_accounts}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'user_accounts')}") %>
+        <%= link_to('Discover Projects', {:controller => :university, :action => :discover_projects}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'discover_projects')}") %>
+        <%= link_to('Donate to Projects', {:controller => :university, :action => :donate_projects}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'donate_projects')}") %>
+    <% end %>
+
+    <%= link_to('Nonprofit 101', {:controller => :university, :action => :nonprofit_accounts}, :class => "bold edit-link #{'selected-edit-link' if npo}") %>
+    <% if npo %>
+      <%= link_to('Get Started', {:controller => :university, :action => :nonprofit_accounts}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'nonprofit_accounts')}") %>
+      <%= link_to('Define Your Project', {:controller => :university, :action => :define_project}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'define_project')}") %>
+      <%= link_to('Describe Your Project', {:controller => :university, :action => :describe_project}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'describe_project')}") %>
+      <%= link_to('Manage Your Project', {:controller => :university, :action => :manage_project}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'manage_project')}") %>
+      <%= link_to('Engage Your Community', {:controller => :university, :action => :community_engagement}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'community_engagement')}") %>
+      <%= link_to('Promote Your Project', {:controller => :university, :action => :project_promo}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'project_promo')}") %>
+      <%= link_to('Complete Your Project', {:controller => :university, :action => :complete_project}, :class => "uni-sub-link #{'selected-uni-link' if cp('university', 'complete_project')}") %>
+	  <%= link_to 'Get Started', {:controller => :npos, :action => :new}, :class => 'weeve-medium-button signup-uni' %>
+    <% end %>
+
+
+  </div>
+
+  <script type='text/javascript'>
+    var nextdark = new Image();
+    nextdark.src = '<%= asset_path('uninextdark.png')%>';
+    var prevdark = new Image();
+    prevdark.src = '<%= asset_path('uniprevdark.png')%>';
+  </script>
+
+  <div class='uniRight'>

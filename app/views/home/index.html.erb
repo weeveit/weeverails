@@ -1,0 +1,237 @@
+<div class='hometop'>
+
+    <div class='background'></div>
+
+	<div class='center weevewidth landingFeatured'>
+
+		<div id='landingTitleWrap'>
+
+            <div id='landingTitleContentWrap'>
+                <div id='landingTitleSentence'> Give Smarter</div>
+				
+                <div id='landingSub'>100% of donations directly fund nonprofit projects. <br/>  Fund & Follow the change in your community. <%= link_to 'Learn more', {:controller => :university, :action => :user_accounts}%></div>
+            </div>
+            <%= link_to 'Discover Projects', {:controller => :home, :action => :projects, :featured => get_featured[:recent]}, :class => 'discoverbutton weeve-medium-button' %>
+		</div>
+
+        <div id='landingPressWrap'>
+            <div class='featuredInWrap'>
+                <span class='upper bold featuredIn'>Featured In</span>
+                <span class='dottedHr'></span>
+            </div>
+            <div class='landingPressLogos'>
+              <table>
+                <tr>
+                  <td>
+                    <a target="_blank" href="http://www.techvibes.com/blog/vancouvers-weeve-is-the-worlds-first-crowdfunding-platform-that-doesnt-take-a-cut-2012-07-05"><img src='<%= asset_path('tvbw.png')%>'/></a>
+                  </td>
+                  <td>
+                    <a target="_blank" href="http://digitaljournal.com/article/329493"><img src='<%= asset_path('dgbw.png')%>'/></a>
+                  </td>
+                  <td>
+                    <a target="_blank" href="http://techcrunch.com/2012/08/22/vancouvers-growlab-accelerator-graduates-its-spring-2012-cohort/"><img src='<%= asset_path('tclogo.png')%>'/></a>
+                  </td>
+                  <td>
+                    <a target="_blank" href="http://www.huffingtonpost.ca/karen-geier/start-up-business-advice_b_2056755.html"><img src='<%= asset_path('hufflogo.png')%>'/></a>
+                  </td>
+				  <td>
+                    <a target="_blank" href="http://www.vancouverobserver.com/city/vancouvers-weeve-brings-free-crowdfunding-alternative-kickstarter-and-indiegogo"><img src='<%= asset_path('vobw.png')%>'/></a>
+                  </td>
+                </tr>
+              </table>
+            </div>
+        </div>
+
+		<div id='featuredProjectWrap'>
+			<div id='featuredLeftWrap'>
+				<div id='featuredTitle'>
+					<span class='bold'>Spotlight: </span> 
+					<%= link_to @feature.title, {:controller => :projects, :action => :show, :id => @feature.id}, :class => 'weeve-link'%>
+					
+				</div>
+				<div id='leftLeftWrap'>
+					<% if @feature.startingvideo %>
+						<div id='projectVideoWrap'>
+							<%= renderYoutube(325,245,@feature.startingvideo).html_safe %>
+						</div>
+				    <% else %>
+				        <img src='<%= @feature.startmedia %>' id='featuredProjImage'></img>
+				    <% end %>
+					
+				</div>
+				<div id='leftRightWrap'>
+					<div id='featuredDesc'>
+						<%= @feature.blurb %>
+					</div>
+					
+					<% donations = Donation.donations_for(@feature.id) %>
+		            <% total = Donation.total_for(donations) %>
+		            <% percent = (total.to_f/@feature.target_amount.to_f*100).to_i %>
+					
+					<div id='featuredContentBottom'>
+						<div id='bottomStatsWrap'>
+							<div class='bottomStat'>
+								<%= percent %>% funded
+							</div>
+							<div class='bottomStat'>
+								<img class='locationIcon' src='<%= asset_path('location-icon3.png') %>'/><span><%= @feature.location %></span>
+							</div>
+						</div>
+						<div class='donation-bar-wrapper'>
+	                        <div class='donation-bar' style='width: <%= percent %>%'></div>
+	                    </div>
+					</div>
+					
+					
+				</div>
+			</div>
+			<div id='featuredRightWrap'>
+				<div class='featuredStatWrap'>
+					<div class='featuredValue bold'><%= donations.size %></div>
+					<div>donations</div>
+				</div>
+				<div class='featuredStatWrap'>
+					<div class='featuredValue bold'>$<%= total %></div>
+					<div>donated of $<%= @feature.target_amount %></div>
+				</div>
+				<div class='featuredStatWrap'>
+					<div class='featuredValue bold'><%= Project.days_left(@feature.id) %></div>
+					<div>days to go</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div class='landingProjectsWrap centered'>
+	<div class='centered landingTitle bold'>Support Change in Your Community</div>
+	<% @projects.each do |p| %>
+		<%= render :partial => 'projects/project_box', :locals => {:profile => false, :p => p}%>
+	<% end %>
+</div>
+
+ <hr class='centered dotted shadowed landingHR'/>
+
+
+<div class='centered landingTitle bold boxesTitle'>
+    Crowdfunding for nonprofits like never before
+</div>
+
+<div class='centered landingMiddle'>
+    <div class='middleLeft'>
+      <iframe src="http://player.vimeo.com/video/41938130" width="900" height="510" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    </div>
+</div>
+
+ <hr class='centered dotted shadowed landingHR'/>
+
+<div class='centered landingTitle bold boxesTitle'>
+  Stay in the loop with Weeve Insider
+</div>
+<div id='center'>
+    <div id='boxesWrap'>
+      <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+      <div class='twitterFeedWrap'>
+        <script>
+            new TWTR.Widget({
+                version: 2,
+                type: 'profile',
+                rpp: 8,
+                interval: 30000,
+                width: 299,
+                height: 360,
+                theme: {
+                    shell: {
+                        background: 'none',
+                        color: '#595959',
+                    },
+                    tweets: {
+                        background: '#ffffff',
+                        color: '#4a4a4a',
+                        links: '#2e7eb3'
+                    }
+                },
+                features: {
+                    scrollbar: false,
+                    loop: false,
+                    live: true,
+                    behavior: 'all'
+                }
+            }).render().setUser('weeveit').start();
+        </script>
+      </div>
+      <div class='single middletop' >
+        <div class='boxesContentWrap'>
+          <div class='bold boxtitle'>What is Weeve?</div>
+          <div class='boxContent '>
+            Weeve is a community of change agents. Our free, simple and secure platform connects businesses, individuals and nonprofit organizations together in order to generate positive social change, one community at a time. We are dedicated to build sustainable and resilient communities. Join us in redefining social good and democratizing giving. 
+          </div>
+        </div>
+      </div>
+      <div class='single topright'>
+        <div class='boxesContentWrap'>
+          <div class='bold boxtitle'>Recent Events</div>
+          <div class='boxContent'>
+            February 14, 2013<br/>
+            Weeve has been acquired by LX Ventures.  <%= link_to "Read the announcement here", :controller => :home, :action => :announcement %>
+          </div>
+        </div>
+      </div>
+      <div class='single center unibox middle' >
+        <div class='boxesContentWrap'>
+          <div class='boxContent '>
+            <div class='unisub'>Get started with Weeve</div>
+            <%= link_to :controller => :university, :action => :index do %>
+                <img class='uniboxhat' src='<%= asset_path('phdhat.png') %>'/>
+                <div class='unisubbottom bold'>Weeve University</div>
+            <% end %>
+          </div>
+        </div>
+        <script type='text/javascript'>
+            img1 = new Image();
+            img1.src = "<%= asset_path('greek2.png') %>";
+        </script>
+      </div>
+      <div class='single center' >
+        <div class='boxesContentWrap'>
+          <div class='bold boxtitle'>Connect with Weeve</div>
+          <div class='connectors'>
+            <div class='connectWrap'>
+              <a href="https://www.facebook.com/WeeveIt" class='connectLink'><img src='<%= asset_path('facebookbox.png') %>'/></a>
+            </div>
+            <div class='connectWrap'>
+              <a href="https://twitter.com/#!/weeveit" class='connectLink'><img src='<%= asset_path('twitterbox.png') %>'/></a>
+            </div>
+            <div class='connectWrap'>
+              <a href="http://weeve.tumblr.com/" class='connectLink'><img src='<%= asset_path('tumblrbox.png') %>'/></a>
+            </div>
+            <div class='connectWrapLong'>
+              <a href="http://www.youtube.com/user/weeveit" class='connectLink'><img src='<%= asset_path('youtubebox.png') %>'/></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='single bottomleft' >
+        <div class='boxesContentWrap'>
+          <div class='bold boxtitle'>Careers</div>
+          <div class='careerText'>
+            Weeve is always looking for passionate, driven, and fun-loving people to join our team.  We are a startup based in Vancouver, BC.
+            <%= link_to 'view positions', {:controller => :careers}, :class => 'boxViewLink' %>
+          </div>
+        </div>
+      </div>
+      <div class='doublewide bottomright'>
+        <div class='boxesContentWrap'>
+          <div class='bold boxtitle'>Our Endorsements</div>
+          <div class='quoteContent margintop italic boxquote bold'>
+            "Weeve is a community for anyone who believes in positive social change"
+          </div>
+          <div class='boxendorser'>- Joel Solomon, President of Renewal</div>
+          <div class='quoteContent margintop italic boxquote bold'>
+            "Weeve represents the future of philanthropy"
+          </div>
+          <div class='boxendorser'>- John Horn, Associate Director of Career Services at UBC</div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div class='popupContainer' id='donationNonuserPopup'>
+    <div class='clearBackground'></div>
+    <div class='popupWrap'>
+		<div class='donationCont' id='guestDonationForm'>
+            <div class="popupclose weeve-link">close</div>
+            <div class='popupLeft'>
+                <div class='popuptitle bold'>Make your donation</div>
+                <div class='popupcontent'>Thank you for your interest in the <%= @project.title %> project! Make sure you review the 'Things to know' to the right before you make your donation!</div>
+                <div class='popupcontent'>How much would you like to donate?</div>
+                <%= form_tag :controller => :donations, :action => :donate, :project_id => @project.id, :guest_checkout => true do -%>
+                    <div>
+                        <%= text_field :donation, :amount, :class => 'popupinput input', :id => 'donationInput'%><div class='popupinputhint'>Any amount you want!<br/>$1 minimum please</div>
+                    </div>
+                    <%= submit_tag "Continue to PayPal", :class => 'popupsubmit weeve-medium-button', :id => 'donationSubmit' %>
+                <% end -%>
+            </div>
+            <div class='popupRight'>
+                <div class="fintprinttitle">Things to know</div>
+                <div class="fintprint">Once you enter your donation amount, you will be taken to PayPal to complete the donation process.</div>
+                <div class="fintprint">You may only enter whole dollar amounts.	</div>
+            </div>
+        </div>
+	
+		<div class='donationCont' id='donationChoose'>
+            <div class="popupclose weeve-link">close</div>
+			<div id='choosetitle' class='bold'>How would you like to donate?</div>
+			<%= link_to({:controller => :users, :action => :new}, :id => 'chooseLogin') do %>
+				<div class='text-center chooseSubtitle bold'>With a Weeve account</div>
+				<div class='chooseParagraph'>
+					Weeve accounts are free and allows you to
+				</div>
+				<ul class='chooseList'>
+					<li>Create and manage an online philanthropic profile</li>
+					<li>Keep track of your donation history</li>
+				</ul>
+			<% end %>
+			<div id='chooseNonuser'>
+				<div class='text-center chooseSubtitle bold guestParagraph'>
+					As a guest
+				</div>
+				<div class='text-center chooseParagraph'>
+					Guest checkouts do not require you to log in.
+				</div>
+			</div>
+			<div id='alreadyLogged'>Already have an account? <span class='weeve-link' id='popupLoginLink'>Log in</span></div>
+			<script type='text/javascript'>
+				loadPopupLogin();
+			</script>
+		</div>
+	</div>
+</div>

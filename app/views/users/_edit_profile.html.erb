@@ -1,0 +1,69 @@
+<div class='edit-title'>Password</div>
+<%= form_for(@usertype, :url => {:controller => :users, :action => :update_profile}) do |f| %>
+    <% if @account.errors.any? %>
+        <div class='confirmBox error smallmargin'>
+            <div class='closeConfirm'></div>
+            <% for message in @account.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+        </div>
+    <% end %>
+    <div class='signup-form account-edit'>
+        <table>
+            <tbody>
+                <tr>
+                    <th class='picture-th'>Picture</th>
+                    <td>
+                        <div class='profile-edit-picture'><img src='<%= @usertype.thumbnail %>' ></img></div>
+                        <%= f.file_field :thumbnail, :class => 'file-input' %>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint">Max file size 3MB.  JPG, PNG, GIF.</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td><%= f.text_field :fullname, :class => 'signup-form-field' %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint"></td>
+                </tr>
+                <%= fields_for @account do |account| %>
+                <tr>
+                    <th>Email</th>
+                    <td><%= account.text_field :email, :class => 'signup-form-field' %></td>
+                </tr>
+                <% end %>
+                <tr>
+                    <th></th>
+                    <td class="hint"><%= f.check_box :showemail, :class => 'checkbox' %>Show my email on my profile</td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td><%= f.text_field :location, :class => 'signup-form-field' %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint"><%= f.check_box :showlocation, :class => 'checkbox' %>Show my location on my profile</td>
+                </tr>
+
+                <tr class='checkboxrow'>
+                    <th>Donation History</th>
+                    <td><%= f.check_box :showhistory, :class => 'checkbox' %>Allow others to view my donation history</td>
+                </tr>
+
+                <tr class='emptyrow'>
+                    <th></th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td><%=f.submit "Update",:disable_with => 'creating...', :class => 'signup-submit weeve-medium-button'%></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<% end %>

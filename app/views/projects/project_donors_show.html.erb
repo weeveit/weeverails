@@ -1,0 +1,33 @@
+<%= render "project_show_top" %>
+<% donations = Donation.donations_for(@project.id)%>
+
+
+<% if donations.size == 0 %>
+    <div class='projectnotice bold'>
+        There are no donations yet for <%= @project.title %>.
+    </div>
+<% else %>
+    <div class='project-tab-titlte bold'><%= @project.title %> has <%= donations.size if donations %> donations</div>
+    <div class='donorsWrap'>
+    <% donations.reverse.each do |d| %>
+		<% if d.user_id == -1 %>
+		<div class='donorPic'>
+            <div class='donorAmount bold'><%= d.received_at.strftime("%b %e")%></div>
+            <img src='<%= asset_path('usericon.png') %>'></img>
+            <div class='donorName bold'><%= Guest.find_by_donation_id(d.id).fullname %></div>
+        </div>
+		<% else %>
+        	<%= link_to :controller => :users, :action => :history, :id => User.find(d.user_id).account_id do %>
+	        <div class='donorPic'>
+	            <div class='donorAmount bold'><%= d.received_at.strftime("%b %e")%></div>
+	            <img src='<%= User.find(d.user_id).thumbnail%>'></img>
+	            <div class='donorName bold'><%= User.find(d.user_id).fullname %></div>
+	        </div>
+	        <% end %>
+		<% end %>
+    <% end %>
+    </div>
+<% end %>
+
+<%= render "project_show_bottom" %>
+

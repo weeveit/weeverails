@@ -1,0 +1,67 @@
+<%= render :partial => "uni_top", :locals => {:npo => true}%>
+<div class='uniContentWrap'>
+  <div class='uniTitle'>Describe Your Project</div>
+
+  <div class='uniPara'>
+	Users who have taken an interest in your project will want to learn more about it! Your project page is the perfect place to communicate with your audience. Take time to tell your story so your supporters feel engaged and empowered to help your cause.
+  </div>
+
+  <div class='uniPara'>
+    <span class='weeve-link'> This project </span> is a great example on how to describe your project.
+  </div>
+
+  <div class='uniSubtitle'>
+    Starting Media
+  </div>
+
+  <div class='uniPara'>
+	Starting media is the first piece of information that users see when they click into your project. You can upload an image or embed a video from YouTube. Weeve recommends choosing video as it allows users to get a more realistic and interactive understanding of your project and goals!  </div>
+
+  <div class='uniSubtitle'>
+    Project Overview
+  </div>
+
+  <div class='uniPara'>
+	In this section, you want to tell your story. Why are you starting this project? What is the specific community need that you are responding to? Why should people care about this project?
+  </div>
+
+  <div class='uniSubtitle'>
+    Project Impact
+  </div>
+
+  <div class='uniPara'>
+	Here, you want to be more specific about your project’s social impact. How many people will be helped? How does your project benefit the community?  
+	</div>
+
+  <div class='uniSubtitle'>
+    Use of Funds
+  </div>
+
+  <div class='uniPara'>
+	To facilitate transparency, let your supporters know how their money is being used to make a difference. Does $10 help a child to go to school? Does $20 give a classroom 20 new books? At the end of the day, people want to know that they have made a difference in someone else’s life. 
+	 </div>
+
+  <div class='uniSubtitle'>
+    Project Milestones
+  </div>
+
+  <div class='uniPara'>
+	What does the timeline of your project look like? What is the social impact of each milestone? This section is designed to help your supporters understand how quickly the project can be implemented.  
+	</div>
+
+  <div class='uniSubtitle'>
+    What does a project life cycle looks like?
+  </div>
+
+  <div class='cycleWrap'>
+    <img src='<%= asset_path('cycle.png')%>'/>
+  </div>
+
+  <hr class='dotted uniDotted'/>
+
+  <div class='uniNextWrap'>
+    <%= link_to 'Define Your Project', {:controller => :university, :action => :define_project}, :class => 'uniPrev' %>
+    <%= link_to 'Manage Your Project', {:controller => :university, :action => :manage_project}, :class => 'uniNext' %>
+  </div>
+</div>
+<%= render :partial => "uni_bottom"%>

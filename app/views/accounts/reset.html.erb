@@ -1,0 +1,44 @@
+<div class='forgot-pass-title'>New Password</div>
+<div class='forgot-pass-subtitle'>Create your new password here</div>
+<%= form_tag :controller => :accounts, :action => :update_password do %>
+    <% if @user.errors.any? %>
+        <div class='confirmBox error smallmargin smallConfirmBox'>
+            <div class='closeConfirm'></div>
+            <% for message in @user.errors.full_messages %>
+                <li><%= message %></li>
+            <% end %>
+        </div>
+    <% end %>
+    <%= hidden_field :account, :id, :value => @user.id %>
+    <div class='signup-form account-edit'>
+        <table>
+            <tbody>
+                <tr>
+                    <th>New Password</th>
+                    <td><%= password_field :account, :new_password, :class => 'signup-form-field' %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint">At least 6 characters</td>
+                </tr>
+
+                <tr>
+
+                <tr>
+                    <th>Confirm New Password</th>
+                    <td><%= password_field :account, :new_password_confirm, :class => 'signup-form-field' %></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td class="hint"></td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td><%= submit_tag "Update",:disable_with => 'creating...', :class => 'signup-submit weeve-medium-button'%></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<% end %>
+<div class='did-you-know'>Did you know cats sleep 16 to 18 hours per day?</div>

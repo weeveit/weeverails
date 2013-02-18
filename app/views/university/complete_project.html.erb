@@ -1,0 +1,39 @@
+<%= render :partial => "uni_top", :locals => {:npo => true}%>
+<div class='uniContentWrap'>
+  <div class='uniTitle'>Complete Your Project</div>
+
+  <div class='uniPara'>
+	After your project reaches the end of its funding duration, Weeve users will no longer be able to donate to your project. At this point, you may issue any tax receipts to donors (if applicable). More importantly, continue to update your supporters with project updates – keep them involved with promoting social good in their communities!
+  </div>
+
+  <div class='uniSubtitle'>
+    What happens after my project expires?
+  </div>
+
+  <div class='uniPara'>
+    If you have reached your fundraising goal, congratulations!  There are a few things that you will need to do to complete your project:
+    <ol class='uniBulletList'>
+      <li>Thank your supporters and keep them in the loop on the progress of the project. </li>
+      <li>Issue tax receipts (if any).</li>
+    </ol>
+  </div>
+
+  <div class='uniPara'>
+	If you did not reach your fundraising goal, that is okay. You will have to explain to your supporters what you will be doing with the money raised or inform them of external fundraising sources. 
+	 </div>
+
+  <div class='uniSubtitle'>
+    How do I download donor info?
+  </div>
+
+  <div class='uniPara'>
+	Click on “Manage Project” and go into project status. Click on “download donor list” to download your donor information onto a spreadsheet. You will have all the information needed to issue tax receipts!  
+	</div>
+
+  <hr class='dotted uniDotted'/>
+
+  <div class='uniNextWrap'>
+    <%= link_to 'Promote Your Project', {:controller => :university, :action => :project_promo}, :class => 'uniPrev' %>
+  </div>
+</div>
+<%= render :partial => "uni_bottom"%>

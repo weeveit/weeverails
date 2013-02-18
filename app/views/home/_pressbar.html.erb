@@ -1,0 +1,5 @@
+<div id='pressButtons'>
+	<%= link_to 'Media Kit', {:controller => :home, :action => :press}, :class => "pressButton #{'pressButtonHighlight' if cp('home','press') }" %>
+	<%= link_to 'Press Releases', {:controller => :home, :action => :pr}, :class => "pressButton #{'pressButtonHighlight' if cp('home','pr') }" %>
+	<%= link_to 'Press Coverage', {:controller => :home, :action => :pc}, :class => "pressButton #{'pressButtonHighlight' if cp('home','pc') }" %>
+</div>

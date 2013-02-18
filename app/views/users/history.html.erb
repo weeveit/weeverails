@@ -1,0 +1,36 @@
+<%= render :partial => "profile_top", :locals => {:home => true} %>
+
+<% if @user_details.showhistory || @user == current_user %>
+<div class='profile-project-stats-wrap'>
+    <div class='profile-stats-wrap'>
+        <% donations = Donation.donations_for_user(@user_details.id)%>
+        <div class='stats-value'><%= Donation.number_of_projects_for_user(donations) %></div>
+        <div class='stats-title'>projects funded</div>
+    </div>
+    <div class='profile-stats-wrap'>
+        <div class='stats-value'>$<%= number_with_delimiter(Donation.total_for(donations))%></div>
+        <div class='stats-title'>donated total</div>
+    </div>
+</div>
+
+<div class='small-empty-space'></div>
+<% history = user_donation_history(donations) %>
+<% history.keys.reverse.each do |v| %>
+<div class='profile-main-title'><%= "#{month_hash[v].to_s}, #{history[v][0].received_at.year}" %></div>
+
+    <% history[v].reverse.each do |d| %>
+        <div class='profile-main-content-wrap'>
+            <span class='profile-main-content-value'>Donated <%= ('$'+d.npo_amount.round.to_s) if current_user == @user%> to project</span>
+            <span class='profile-main-content-project'>
+                <% project = Donation.project_for(d) %>
+                <%= link_to project.title, {:controller => :projects, :action => :show, :id => project.id}, :class => 'weeve-link' %>
+            </span>
+            <span class='profile-main-content-date'><%= "#{short_month_hash[d.received_at.month]} #{d.received_at.day}"%></span>
+        </div>
+    <% end %>
+<% end %>
+<% else %>
+    <div class='profile-main-title'><%= @user_details.fullname %> has chosen not to display their donation history</div>
+<% end %>
+
+<%= render :partial => "profile_bottom", :locals => {:home => true} %>

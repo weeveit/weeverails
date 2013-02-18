@@ -1,0 +1,41 @@
+<h1>Hello, admin</h1>
+<div class='project-page-links'>
+  <ul id="navbar">
+    <li><a href="newpanel"class="weeve-link project-page-link selectedTab">Home</a><ul>
+      </ul>
+    </li>
+    <li><a href="#"class="weeve-link project-page-link selectedTab">Projects</a><ul>
+      <li><%= link_to 'Overview', {:controller => :admins, :action => :projectoverview} %></li>
+      <li><a href="#">Edit Projects</a></li>
+      <li><a href="#">Delete Projects</a></li></ul>
+    </li>
+    <li><a href="#"class="weeve-link project-page-link selectedTab">Users</a><ul>
+      <li><a href="users_overview">Overview</a></li>
+      <li><a href="#">Edit Users</a></li>
+      <li><a href="#">Delete Users</a></li></ul>
+    </li>
+    <li><a href="#"class="weeve-link project-page-link selectedTab">NPOs</a><ul>
+      <li><a href="npos_overview">Overview</a></li>
+      <li><a href="#">Edit NPOs</a></li>
+      <li><a href="#">Delete NPOs</a></li></ul>
+    </li>
+    <li><a href="#"class="weeve-link project-page-link selectedTab">Business</a><ul>
+      <li><a href="#">View All</a></li>
+      <li><a href="#">Edit</a></li>
+      <li><a href="#">Delete</a></li></ul>
+    </li>
+    <li><a href="#"class="weeve-link project-page-link selectedTab">Donations</a><ul>
+      <li><a href="donations_overview">Overview</a></li>
+      <li><a href="#">Tracking</a></li>
+      <li><a href="#">XXX</a></li></ul>
+    </li>
+    <li><a href="#"class="weeve-link project-page-link selectedTab">Settings</a><ul>
+      <li><a href="#">Overview</a></li></ul>
+    </li>
+    <li><a href="#"class="weeve-link project-page-link selectedTab">Export</a><ul>
+      <li><%= link_to "User Email", {:controller => :admins, :action => :users_spreadsheet} %></li>
+      <li><%= link_to "Npo Email", {:controller => :admins, :action => :npos_spreadsheet} %></li>
+    </li>
+    <!-- ... and so on ... -->
+  </ul>
+</div>

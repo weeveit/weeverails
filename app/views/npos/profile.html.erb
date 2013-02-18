@@ -1,0 +1,43 @@
+<%= render :partial => "profile_top", :locals => {:home => true} %>
+<div class='profile-npo-stats-container'>
+    <div class='profile-npo-stats-wrap'>
+        <div class='stats-value'><%= @user_details.projects.size %></div>
+        <div class='stats-title'>projects</div>
+    </div>
+    <div class='profile-npo-stats-wrap'>
+        <% donations = Donation.donations_for_npo(@user.id) %>
+        <div class='stats-value'>$<%= Donation.total_for(donations) %></div>
+        <div class='stats-title'>funded</div>
+    </div>
+
+    <div class='profile-npo-stats-wrap'>
+        <div class='stats-value'><%= Donation.number_of_donors_for_npo(donations)%></div>
+        <div class='stats-title'>donors</div>
+    </div>
+</div>
+
+<div class='project-area-content'>
+
+    <% if @user_details.projects.size == 0 %>
+        <div class='gettingStartedNpo'>
+            <div class='startedArrow'>
+                <img src="<%= asset_path('startedarrow.png')%>"/>
+            </div>
+            <div class='npoProfileTitle bold'>Get started with your first community project!</div>
+            <div class='npoProfileContent'>Click on the "Create new Project" button above in order to get started on your first community project.  </div>
+            <div class='npoProfileTitle bold'>How do projects work exactly?</div>
+            <div class='npoProfileContent'>It's quite simple actually!  Once you submit your first project, we will review it before publishing it.  At any point during the project lifecycle, you can view your project and edit it to reflect any additional information you'd like to share with your donors!  As donors donate, funds are automatically transferred into your PayPal account and fees are automatically deducted.</div>
+            <div class='npoProfileTitle bold'>What type of project management options are there?</div>
+        </div>
+    <% else %>
+        <% @user_details.projects.each do |p| %>
+
+            <% if current_user && current_user.id == @user_details.account_id || current_admin %>
+                <%= render :partial => "projects/project_box", :locals => {:p => p, :user => @user_details, :profile => true} %>
+            <% elsif p.status != Project.status[:unverified] && p.status != Project.status[:queued] %>
+                <%= render :partial => "projects/project_box", :locals => {:p => p, :user => @user_details, :profile => true} %>
+            <% end %>
+        <% end %>
+    <% end %>
+</div>
+<%= render :partial => "profile_bottom", :locals => {:home => true} %>

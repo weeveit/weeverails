@@ -1,0 +1,38 @@
+<%= render 'menubar' %>
+
+
+</br></br>
+<div class='npoadminwrap'>
+  <div class='nponame bold'>All NPOS</div>
+  <table class='npoprojtable'>
+    <tr>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>Email</th>
+      <th>PayPal Email</th>
+	  <th>PayPal Currency</th>
+    </tr>
+    <% @npos = Npo.all %>
+    <% @npos.each do |n| %>
+        <tr>
+          <td><%= n.name %></td>
+          <td><%= n.representative %></td>
+          <td><%= Account.find(n.account_id).email %></td>
+          <td>
+            <%= n.paypal_email %>
+            <%= form_for( n, :url => {:controller => :admins, :action => :update_npo_paypal, :npo_id => n.id}) do |f| %>
+                <%= f.text_field :paypal_email %>
+                <%= f.submit 'Update' %>
+            <% end %>
+          </td>
+          <td>
+			<%= n.paypal_currency %>
+			<%= form_for( n, :url => {:controller => :admins, :action => :update_npo_paypal, :npo_id => n.id}) do |f| %>
+                <%= f.select :paypal_currency, Npo.currency, {},:class => 'signup-form-select' %>
+                <%= f.submit 'Update' %>
+            <% end %>
+	 	  </td>
+        </tr>
+    <% end %>
+  </table>
+</div>

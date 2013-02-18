@@ -1,0 +1,13 @@
+<div class='edit-title'>Personal Information</div>
+
+<%= form_for(@usertype, :url => {:controller => :users, :action => :update_personal_information}) do |f| %>
+    <% if @account.errors.any? %>
+        <div class='confirmBox error smallmargin'>
+            <div class='closeConfirm'></div>
+            <% for message in @account.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+        </div>
+    <% end %>
+    <%= render :partial => 'personal_information_form', :locals => {:f => f, :submit => true} %>
+<% end %>

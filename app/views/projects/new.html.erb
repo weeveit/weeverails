@@ -1,0 +1,182 @@
+<div class='createProjectMain'>
+
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">
+bkLib.onDomLoaded(function() {
+	new nicEditor({
+        buttonList : ['left','center','image','bold','italic','link','unlink','ol','ul','fontFormat']
+    }).panelInstance('detailsEditor');
+    new nicEditor({
+        buttonList : ['left','center','image','bold','italic','link','unlink','ol','ul','fontFormat']
+    }).panelInstance('impactEditor');
+    new nicEditor({
+        buttonList : ['left','center','image','bold','italic','link','unlink','ol','ul','fontFormat']
+    }).panelInstance('useEditor');
+    new nicEditor({
+        buttonList : ['left','center','image','bold','italic','link','unlink','ol','ul','fontFormat']
+    }).panelInstance('milestoneEditor');
+});
+</script>
+
+<%= form_for(@project, :url => {:controller => :projects, :action => :create, :account_id => current_usertype.account_id}) do |f| %>
+    <% if @project.errors.any? %>
+        <div class='confirmBox error smallmargin'>
+            <div class='closeConfirm'></div>
+            <% for message in @project.errors.full_messages %>
+              <li><%= message %></li>
+            <% end %>
+        </div>
+    <% end %>
+
+    <div class='sub-header'></div>
+    <div class='signup-header'>
+        <div class='signup-title'>Create Project</div>
+        <div class='signup-subtitle'>Fill out the detailed project information and we will review it before your project goes live!</div>
+    </div>
+
+    <div class='project-signup-large-header-content'>We're thrilled that you're interested in using Weeve, and we can't wait to hear about your project. Please take a few minutes to tell us about your project, the impact, use of funds, and key milestones.  Remember that this is the exact information that users will be able to see, so please make sure it's detailed and complete. Upload media to help convince users to donate and create the visibility that you need to drive the project through!</div>
+
+    <% if current_usertype.paypal_status == Npo.paypal_status[:unverified] %>
+        <div class='warning confirmBox project-new-warning'>
+            Your account currently does not have a verified Business PayPal account.  You must have a verified Business PayPal account in order to receive donations from users.  Please add a PayPal email in your Account Settings under the PayPal tab.
+        </div>
+    <% end %>
+
+    <div class='bold statictitle largetitle'>Project Basics</div>
+
+    <div class='projetBasicsWrap'>
+        <div class='projectCreateBasicsWrapLeft'>
+            <div class='project-signup-form-title'>Project Title</div>
+
+            <div class='project-signup-form-content'>What is your project title? 60 characters maximum.</div>
+            <div class='project-file-input-wrap'>
+                <%= f.text_field :title, :class => 'project-signup-text-medium input', :id => 'proj-title-input' %>
+            </div>
+
+            <div class='project-signup-form-content'>Which category does your project belong to?</div>
+            <div class='project-file-input-wrap'>
+                <%= f.select :category, getCategories.collect {|c| [c,c]},{}, :class => 'project-signup-select input'%>
+            </div>
+
+            <div class='project-signup-form-title'>Project Image</div>
+            <div class='project-signup-form-content imageSub'>You need a project image that users can see when viewing your projects along with others.  Make sure it's a clear image that generally describes what your project aims to do. Max file size 10MB. JPG, PNG, GIF.</div>
+            <div class='project-file-input-wrap'>
+                <%= f.file_field :thumbnail, :class => 'project-file-input'%>
+            </div>
+
+            <div class='project-signup-form-title'>What is the exact amount of money you would like to raise?</div>
+            <%= f.text_field :target_amount, :class => 'project-signup-text requestPopupinput textamount input' %>
+
+            <div class='project-signup-form-title'>How many days would you like to fund for? 60 days max</div>
+            <%= f.text_field :duration, :class => 'project-signup-text daysLeftInput input' %>
+
+            <div class='project-signup-form-title'>Which city is your project located?</div>
+            <div class='project-file-input-wrap'>
+                <%= f.text_field :location, :class => 'project-signup-text-medium locationField input', :id => 'locationField' %>
+            </div>
+            <img class='google-location' src='<%= asset_path('google.png') %>'/>
+            <div class='project-signup-form-title'>Brief Project Description</div>
+            <div class='project-signup-form-content briefSub'>Give a brief description of your project.  A few sentences that will capture a user's attention can go a long way.  <br/>(<span id='remainingCounter'>220</span> characters remaining)</div>
+            <%= f.text_area :blurb, :class => 'project-signup-textarea briefTextArea input', :id => 'blurbArea' %>
+
+            <script type='text/javascript'>
+                counter('remainingCounter', 220, 'blurbArea');
+                autocomplete('locationField')
+            </script>
+
+        </div>
+
+        <div class='projectCreateBasicsWrapRight'>
+            <div id='createProjectBoxWrap'>
+                <div id='projectboxHeader' class='bold'> Here is a preview to what your project will look like</div>
+                <div class='projectbox createProject'>
+                    <div class='landingprojimg'>
+                            <img src='<%= asset_path('projectimage.png') %>'></img>
+                    </div>
+                    <div class='proj-area-title'>Project Title</div>
+                    <div class='proj-area-subtitle'><%= current_usertype.name %></div>
+                    <div class='proj-area-paragraph'>Brief Project Description</div>
+                    <div class='project-location-wrap'>
+                        <div class='iconWrap'><img class='locationIcon' src='<%= asset_path('location-icon3.png') %>'/><span class='projLoc'>Project Location</span></div>
+                        <div class='iconWrap'><img class='moneyicon' src='<%= asset_path('moneyicon.png') %>'/><span>$<span class='target'>0</span> target</span></div>
+                    </div>
+                    <div class='donation-progress'>
+                        <div class='donation-bar-wrapper'>
+                            <div class='donation-bar' style='width: 0%'></div>
+                        </div>
+                        <div class='donation-progress-content'>
+                            <div class='donation-progress-box'>
+                                <div class='donation-progress-box-value'>0%</div>
+                                <div class='donation-progress-box-title'>funded</div>
+                            </div>
+                            <div class='donation-progress-box'>
+                                <div class='donation-progress-box-value'>$0</div>
+                                <div class='donation-progress-box-title'>raised</div>
+                            </div>
+                            <div class='donation-progress-box'>
+                                <div class='donation-progress-box-value daysLeft'>0</div>
+                                <div class='donation-progress-box-title'>days left</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class='bold statictitle largetitle'>Project Page</div>
+
+    <div class='project-signup-form-title'>Starting media</div>
+    <div class='project-signup-form-content'>Your project must start with a piece of media; this will be the first thing users see when viewing your project.  Videos are the best way to tell your story and create engagement!
+
+    <div class='project-file-input-wrap starting-media'>
+        <div class='project-create-file' id='file-input-parent'>
+            <div id='imgButton' class='gradient-button'><div class='buttonText bold'>I want to use an Image</div></div>
+            <div class='bold'>Image upload</div>
+            <div>Max file size 10MB.  JPG, PNG, GIF.</div>
+            <%= f.file_field :startmedia, :class => 'project-file-input' %>
+        </div>
+        <div class='project-create-file' id='url-input-parent'>
+            <div id='videoButton' class='gradient-button'><div class='buttonText bold'>I want to use a Video</div></div>
+            <div class='bold'>Video embed</div>
+            <div>Insert Youtube URL</div>
+            <%= f.text_field :startingvideo, :class => 'project-signup-url input' %>
+        </div>
+        <div id='videoPreview'></div>
+    </div>
+
+    <div class='project-signup-form-title'>Project Overview</div>
+    <div class='project-signup-form-content'>What is the project about? What is your story?</div>
+    <div class='richTextWrap'>
+        <%= f.text_area :overview, :class => 'project-signup-textarea input', :id => 'detailsEditor' %>
+    </div>
+
+    <div class='project-signup-form-title'>Project Impact</div>
+    <div class='project-signup-form-content'>What will be the measurable social, environmental, or economical impacts your project?  e.g. The new shelter will accommodate 300 women and children. </div>
+    <div class='richTextWrap'>
+        <%= f.text_area :impact, :class => 'project-signup-textarea input', :id => 'impactEditor' %>
+    </div>
+
+    <div class='project-signup-form-title'>Use of funds</div>
+    <div class='project-signup-form-content'>How will you use your funds to create the impacts mentioned above?  Mention tangible items or services that you will be creating or prividing.  e.g. 5 beds, 6 toilets, and building supples.</div>
+    <div class='richTextWrap'>
+        <%= f.text_area :funds, :class => 'project-signup-textarea input', :id => 'useEditor' %>
+    </div>
+
+    <div class='project-signup-form-title'>Project Milestones</div>
+    <div class='project-signup-form-content'>What does your timeline look like?  What do you expect to get done by what dates?</div>
+    <div class='richTextWrap'>
+        <%= f.text_area :milestones, :class => 'project-signup-textarea input', :id => 'milestoneEditor' %>
+    </div>
+
+    <script type='text/javascript'>
+        loadProject();
+    </script>
+
+    <div id='project-create-closing' class='bold'>You're done!  Please review your project details before submitting.  After you do so, we will review your project before it goes live.  You can always edit your project details
+                                            after your project goes live as well.</div>
+
+
+    <button class='weeve-medium-button project-conditions-continue'>Submit Project</button>
+<% end %>
+</div>

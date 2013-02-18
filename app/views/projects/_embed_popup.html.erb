@@ -1,0 +1,29 @@
+<div class='popupContainer' id='donationPopup'>
+    <div class='clearBackground'></div>
+    <div class='popupWrap'>
+        <div class='donationCont' id='donationPopupCont'>
+            <div class="popupclose weeve-link">close</div>
+            <div class='popupLeft'>
+                <div class='popuptitle bold'>Make your donation</div>
+                <div class='popupcontent'>Thank you for your interest in the <%= @project.title %> project! Make sure you review the 'Things to know' to the right before you make your donation!</div>
+                <div class='popupcontent'>How much would you like to donate?</div>
+                <%= form_tag :controller => :donations, :action => :donate, :user_id => current_usertype.id, :project_id => @project.id do -%>
+                    <div>
+                        <%= text_field :donation, :amount, :class => 'popupinput input', :id => 'donationInput'%><div class='popupinputhint'>Any amount you want!<br/>$1 minimum please</div>
+                    </div>
+                    <%= submit_tag "Continue to PayPal", :class => 'popupsubmit weeve-medium-button', :id => 'donationSubmit' %>
+                <% end -%>
+            </div>
+            <div class='popupRight'>
+                <div class="fintprinttitle">Things to know</div>
+                <div class="fintprint">Once you enter your donation amount, you will be taken to PayPal to complete the donation process.</div>
+                <div class="fintprint">You may only enter whole dollar amounts.	</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    loadPopup();
+</script>

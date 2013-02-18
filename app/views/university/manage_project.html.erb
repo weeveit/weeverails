@@ -1,0 +1,26 @@
+<%= render :partial => "uni_top", :locals => {:npo => true}%>
+<div class='uniContentWrap'>
+  <div class='uniTitle'>Manage Your Project</div>
+
+  <div class='uniPara'>
+    During the lifetime of your project, Weeve makes it easy for you to manage everything in one place. You can:
+    <ol class='uniBulletList'>
+      <li>View statistics about your project, including page views, donations raised, and number of donors.</li>
+      <li>Download a spreadsheet of donor information to issue tax receipts.</li>
+      <li>Edit project content.</li>
+      <li>Create, edit, or delete your project updates.</li>
+    </ol>
+  </div>
+
+  <div class='uniPara'>
+	To manage your project, click on “Manage Project” on your project page. Please keep in mind that you may not change your fundraising goal, duration, and tax receipt eligibility after your project has been published. This is to ensure fairness to your supporters and other nonprofits. 
+	 </div>
+
+  <hr class='dotted uniDotted'/>
+
+  <div class='uniNextWrap'>
+    <%= link_to 'Describe Your Project', {:controller => :university, :action => :describe_project}, :class => 'uniPrev' %>
+    <%= link_to 'Engage Your Community', {:controller => :university, :action => :community_engagement}, :class => 'uniNext' %>
+  </div>
+</div>
+<%= render :partial => "uni_bottom"%>

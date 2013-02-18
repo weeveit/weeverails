@@ -1,0 +1,56 @@
+<%= render :partial => "uni_top", :locals => {:user => true}%>
+<div class='uniContentWrap'>
+  <div class='uniTitle'>Get Started</div>
+
+  <div class='uniPara'>
+	Weeve is a community of change agents founded upon a simple philosophy - that we are in the service of our community and should be the ones responsible for making it a better place. Nonprofits are an integral part of society and they provide a wealth of services that people have an urgent need for. Currently, nonprofits are facing a crisis that is forcing them to close their doors, leaving the people who they service helpless – this is the result of austerity-focused governments (that cut money to grants and foundations) and disengaged individual donors. Weeve wants to help; in fact, we want to empower everyone in the community to help. Join us in our mission to build sustainable and resilient communities!
+  </div>
+
+  <div class='uniSubtitle'>
+    What is a User account?
+  </div>
+
+  <div class='uniPara'>
+    By having an user account you will be able to:
+    <ul class='uniBulletList'>
+      <li>Have a profile page</li>
+      <li>Keep a history for your donations</li>
+      <li>Donate to great projects</li>
+      <li>Interact with nonprofits</li>
+    </ul>
+  </div>
+
+  <div class='uniSubtitle'>
+    How do I sign up?
+  </div>
+
+  <div class='uniPara'>
+    Click on the “Sign Up” page and fill out the registration form. Weeve respects your privacy. In order for nonprofits to issue tax receipts to donors, we share information with the nonprofits which you donate to.
+
+You may also sign up by connecting to Facebook.  
+  </div>
+
+	<div class='uniSubtitle'>
+	    Is an user account required to donate?
+	  </div>
+
+	  <div class='uniPara'>
+	    User accounts are not required to donate.  Simply choose "As a guest" when trying to make a donation in a project page.  Please note that guest checkouts do not reap the benefits of donating with a Weeve account, like saving your personal information for future tax receipts!
+	  </div>
+
+  <div class='uniSubtitle'>
+    Who are the people behind Weeve?
+  </div>
+
+  <div class='uniPara'>
+	We are a team of dedicated young social entrepreneurs with blackbelts in business development, nonprofit advocacy, software development, communications, and social media. We are on a mission to make a positive and powerful difference in communities across the globe.
+  </div>
+
+  <hr class='dotted uniDotted'/>
+
+  <div class='uniNextWrap'>
+
+    <%= link_to 'Discover Projects', {:controller => :university, :action => :discover_projects}, :class => 'uniNext' %>
+  </div>
+</div>
+<%= render :partial => "uni_bottom"%>

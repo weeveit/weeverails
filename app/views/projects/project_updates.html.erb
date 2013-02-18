@@ -1,0 +1,34 @@
+<%= render :partial => "project_edit_top", :locals => {:update => true} %>
+
+<div class='edit-title'>Updates</div>
+
+<div id='project-edit-wrap'>
+    <%= link_to "New Update", {:controller => :updates, :action => :new, :project_id => @project.id, :account_id => current_usertype.account_id}, :class => 'weeve-medium-button' %>
+    <table id='updates-table'>
+        <tr>
+            <th class='titleHeader'>Title</th>
+            <th class='dateHeader'>Date</th>
+            <th class='actionHeader'>Action</th>
+        </tr>
+        <% Update.find_all_by_project_id(@project.id).each do |u| %>
+        <tr>
+            <td class='titleHeader'><%= u.title %></td>
+            <td class='dateHeader'><%= u.created_at.strftime("%b %-d, %Y") %></td>
+            <td class='actionHeader'>
+                <%= link_to "Edit", {:controller => :updates, :action => :edit, :project_id => @project.id, :update_id => u.id, :account_id => current_usertype.account_id}, :class => 'weeve-link' %>
+                ·
+                <%= link_to("Delete", {:controller => :updates, :action => :remove, :update_id => u.id, :account_id => current_usertype.account_id}, :confirm => 'Are you sure you want to delete this update?', :class => 'weeve-link del-link') %>
+            </td>
+        </tr>
+        <% end %>
+        <script type='text/javascript'>
+            $('.del-link').click( function() {
+               if ( !confirm("Are you sure you want to delete this update?") )
+                    return false;
+            });
+        </script>
+    </table>
+</div>
+
+
+<%= render "project_edit_bottom" %>
